@@ -1,0 +1,47 @@
+= Setup
+include::_attributes.adoc[]
+
+[#prerequisite]
+== Prerequisite CLI tools
+
+You will need in this tutorial:
+
+* `minishift` 
+** https://github.com/minishift/minishift/releases[Mac OS and Fedora]
+* docker
+** https://www.docker.com/docker-mac[Mac OS]
+** Fedora: `dnf install docker`
+* kubectl
+** https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl-binary-via-curl[Mac OS]
+** Fedora: `dnf install kubernetes-client`
+* `oc (eval $(minishift oc-env))`
+* Apache Maven
+** https://archive.apache.org/dist/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz[Mac OS]
+** Fedora: `dnf install maven`
+* link:https://github.com/wercker/stern[stern]
+** Mac OS: `brew install stern`
+** Fedora: `sudo curl --output /usr/local/bin/stern -L https://github.com/wercker/stern/releases/download/1.6.0/stern_linux_amd64 && sudo chmod +x /usr/local/bin/stern`
+* istioctl (will be installed via the steps below)
+* `curl`, `gunzip`, `tar` 
+** Mac OS: built-in or part of your bash shell
+** Fedora: should also be installed already, but just in case... `dnf install curl gzip tar`
+* git
+** `dnf install git`
+
+[#minishift]
+== Setup minishift
+[source,bash]
+-----
+#!/bin/bash
+
+minishift profile set serverless
+minishift config set memory 8GB
+minishift config set cpus 4
+minishift config set image-caching true
+minishift addon enable admin-user
+minishift addon enable anyuid
+
+minishift start
+
+eval $(minishift docker-env) && eval $(minishift oc-env)
+-----

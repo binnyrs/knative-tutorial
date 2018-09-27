@@ -1,0 +1,16 @@
+{
+  "name": "faas-tutorial",
+  "version": "1.0.0",
+  "description": "FaaS Tutorial",
+  "repository": "git@github.com:redhat-developer-demos/knative-tutorial.git",
+  "author": "Kamesh Sampath <kamesh.sampath@hotmail.com>",
+  "license": "Apache-2.0",
+  "private": true,
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "@antora/site-generator-default": "^1.1.1"
+  },
+  "scripts": {
+    "site": "antora --pull site.yml --stacktrace"
+  }
+}

@@ -1,0 +1,8 @@
+name: faas-tutorial
+title: FaaS Tutorial
+version: "1.0.0"
+nav:
+  - modules/ROOT/nav.adoc
+  - modules/advanced/nav.adoc
+
+start_page: ROOT:index.adoc

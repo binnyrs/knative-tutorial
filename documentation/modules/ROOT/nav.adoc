@@ -1,0 +1,6 @@
+* xref:index.adoc[Introduction to FaaS Tutorial]
+
+* xref:1setup.adoc[1. Setup]
+** xref:1setup.adoc#prerequisite[Prerequisites]
+** xref:1setup.adoc#minishift[Setup MiniShift]
+** xref:1setup.adoc#environment[Setup Environment]
