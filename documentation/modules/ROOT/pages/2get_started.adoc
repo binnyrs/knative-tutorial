@@ -51,3 +51,59 @@ You can always refer to the link:../../../../solutions/getstarted[Solutions] if 
 [#deploy-services]
 == Deploy Services
 ** xref:2.1get_started_nodejs.adoc[Nodejs Service]
+** xref:2.2get_started_java.adoc[Java Service]
+
+[#points-to-ponder]
+== Points to Ponder
+
+After you have deployed the Java service, you would have noticed that it has triggered a new Kubernetes deployment something like `greeter-deployment-00002`.  Wondering the reason for it, lets compare the two `service.yaml` that were deployed:
+
+.Greeter Service
+|====
+| **NodeJs** service | **Java** service 
+a|
+[source,yaml]
+----
+apiVersion: serving.knative.dev/v1alpha1
+kind: Service
+metadata:
+  name: greeter
+spec:
+  runLatest:
+    configuration:
+      revisionTemplate:
+        spec:
+          container:
+            image: dev.local/greeter:1.0.0
+----
+a|
+[source,yaml]
+----
+apiVersion: serving.knative.dev/v1alpha1
+kind: Service
+metadata:
+  name: greeter
+spec:
+  runLatest:
+    configuration:
+      revisionTemplate:
+        spec:
+          container:
+            image: dev.local/greeter:2.0.0 
+----
+|====
+
+If you observe the only diffrence between the two service deployments is the version of the Docker Image, which is a configuration change.  Knative follows https://12factor.net/[12-factor] application principles where in every configuration change leads to a new revision,
+[source,yaml]
+----
+kubectl get configurations.knative.dev #<1>
+kubectl get revisions.knative.dev #<2>
+----
+
+<1> Will return only one configuration called `greeter`
+<2> Will return two revisions something like `greeter-00001` and `greeter-00002`
+
+[NOTE]
+====
+Each revision will trigger new deployments, and since the service is configured with **runLatest** it always serves the latest revision.  There is also another type of service deployed which can run with xref:3.revisions.adoc[Revisions].
+====

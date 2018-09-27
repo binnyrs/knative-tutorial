@@ -13,6 +13,7 @@ This section shows how to build and deploy an simple greeter nodejs application 
 [source,bash]
 ----
 mkdir -p $PROJECT_HOME/build/getstarted/nodejs
+cd $PROJECT_HOME/build/getstarted/nodejs
 ----
 
 === Create package.json
@@ -61,25 +62,16 @@ spec:
       revisionTemplate:
         spec:
           container:
-            image: dev.local/greeter-nodejs:1.0.0 #<1>
+            image: dev.local/greeter:1.0.0 #<1>
 ----
 
 <1> It is very important that the image is a fully qualified name docker image name with tag.
 
+include::{partialsdir}/deploy_service.adoc[tag=svcdefault]
+
 [#invoke-nodejs-service]
 == Invoke Service
 
-The applications can be invoked only using `knative-ingress-gateway` which was deployed with Knative serving deployment.
+include::{partialsdir}/invoke_service.adoc[]
 
- The following snippet shows how to invoke the greeter nodejs service that was deployed earlier:
-
-[source,bash]
-----
-export IP_ADDRESS=$(kubectl get node -o 'jsonpath={.items[0].status.addresses[0].address}')
-
-export SERVICE_NODEPORT=$(oc get svc knative-ingressgateway -n istio-system -o 'jsonpath={.spec.ports[?(@.port==80)].nodePort}')
-
-export HOST_URL=$(kubectl get routes.serving.knative.dev greeter  -o jsonpath='{.status.domain}')
-
-curl -H "Host: ${HOST_URL}" ${IP_ADDRESS}:${SERVICE_NODEPORT}
-----
+The curl command above should return a response like **NodeJs::Knative on OpenShift**

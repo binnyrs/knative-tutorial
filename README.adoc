@@ -10,15 +10,3 @@ This content is brought to you by http://developers.redhat.com - Register today!
 - A HTML version of this file is published at https://redhat-developer-demos.github.io/knative-tutorial/
 
 - The source code is available at https://github.com/redhat-developer-demos/knative-tutorial
-
-toc::[]
-
-include::documentation/modules/ROOT/pages/1setup.adoc[]
-
-include::documentation/modules/ROOT/pages/2get_started.adoc[]
-
-include::documentation/modules/ROOT/pages/2.1get_started_nodejs.adoc[]
-
-== Tips &amp; Tricks
-
-NOTE: Work in Progress

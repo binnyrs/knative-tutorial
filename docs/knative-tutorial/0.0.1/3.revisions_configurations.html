@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Getting Started - Nodejs :: Knative Tutorial Docs</title>
-    <link rel="canonical" href="https://redhat-developer-demos.github.io/faas-tutorial/knative-tutorial/0.0.1/2.1get_started_nodejs.html">
+    <title>Revisions and Configurations :: Knative Tutorial Docs</title>
+    <link rel="canonical" href="https://redhat-developer-demos.github.io/faas-tutorial/knative-tutorial/0.0.1/3.revisions_configurations.html">
     <meta name="generator" content="Antora 1.1.1">
     <link rel="stylesheet" href="../../_/css/site.css">
 <link rel="icon" href="../../_/img/favicon.ico" type="image/x-icon">  </head>
@@ -99,24 +99,24 @@
     <button class="nav-toggle"></button>
     <a class="nav-link" href="2get_started.html#deploy-services">Build and Deploy Services</a>
 <ul class="nav-list">
-  <li class="nav-item is-current-page" data-depth="3">
+  <li class="nav-item" data-depth="3">
     <button class="nav-toggle"></button>
     <a class="nav-link" href="2.1get_started_nodejs.html">NodeJs</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="#overview">Overview</a>
+    <a class="nav-link" href="2.1get_started_nodejs.html#overview">Overview</a>
   </li>
   <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="#create-nodejs-service">Create Service</a>
+    <a class="nav-link" href="2.1get_started_nodejs.html#create-nodejs-service">Create Service</a>
   </li>
   <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="#build-nodejs-service">Build Service</a>
+    <a class="nav-link" href="2.1get_started_nodejs.html#build-nodejs-service">Build Service</a>
   </li>
   <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="#deploy-nodejs-service">Deploy Service</a>
+    <a class="nav-link" href="2.1get_started_nodejs.html#deploy-nodejs-service">Deploy Service</a>
   </li>
   <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="#invoke-nodejs-service">Invoke Service</a>
+    <a class="nav-link" href="2.1get_started_nodejs.html#invoke-nodejs-service">Invoke Service</a>
   </li>
 </ul>
   </li>
@@ -151,21 +151,21 @@
   </li>
 </ul>
   </li>
-  <li class="nav-item" data-depth="1">
+  <li class="nav-item is-current-page" data-depth="1">
     <button class="nav-toggle"></button>
     <a class="nav-link" href="3.revisions_configurations.html">3. Revisions and Configurations</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="3.revisions_configurations.html#overview">Overview</a>
+    <a class="nav-link" href="#overview">Overview</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="3.revisions_configurations.html#roll-out-changes">Change Configuration</a>
+    <a class="nav-link" href="#roll-out-changes">Change Configuration</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="3.revisions_configurations.html#rollback-changes">Rollback Configuration</a>
+    <a class="nav-link" href="#rollback-changes">Rollback Configuration</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="3.revisions_configurations.html#invoke-rev-service">Invoke Service</a>
+    <a class="nav-link" href="#invoke-rev-service">Invoke Service</a>
   </li>
 </ul>
   </li>
@@ -200,134 +200,55 @@
 <nav class="crumbs" aria-label="breadcrumbs">
   <ul>
     <li class="crumb"><a href="index.html">Knative Tutorial</a></li>
-    <li class="crumb"><a href="2get_started.html">2. Get Started</a></li>
-    <li class="crumb"><a href="2get_started.html#deploy-services">Build and Deploy Services</a></li>
-    <li class="crumb"><a href="2.1get_started_nodejs.html">NodeJs</a></li>
+    <li class="crumb"><a href="3.revisions_configurations.html">3. Revisions and Configurations</a></li>
   </ul>
 </nav>
-  <div class="edit-this-page"><a href="file:///Users/kameshs/git/kameshsampath/knative-tutorial/documentation/modules/ROOT/pages/2.1get_started_nodejs.adoc">Edit this Page</a></div>
+  <div class="edit-this-page"><a href="file:///Users/kameshs/git/kameshsampath/knative-tutorial/documentation/modules/ROOT/pages/3.revisions_configurations.adoc">Edit this Page</a></div>
 </div>
 <article class="doc">
-<h1>Getting Started - Nodejs</h1>
+<h1>Revisions and Configurations</h1>
 <div class="sect1">
-<h2 id="overview"><a class="anchor" href="#overview"></a>Overview</h2>
+<h2 id="_overview"><a class="anchor" href="#_overview"></a>Overview</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This section shows how to build and deploy an simple greeter nodejs application as Knative service</p>
+<p>Knative follows <a href="https://12factor.net/">12-factor</a> application principles where in every configuration change leads to a new revision.  The configuration change could be image change, environment variables gets added or removed from the configuration.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">kubectl get configurations.knative.dev <i class="conum" data-value="1"></i><b>(1)</b>
+kubectl get revisions.knative.dev <i class="conum" data-value="2"></i><b>(2)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Will return only one configuration called <code>greeter</code></td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Will return two revisions something like <code>greeter-00001</code> and <code>greeter-00002</code></td>
+</tr>
+</table>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="create-nodejs-service"><a class="anchor" href="#create-nodejs-service"></a>Create Service</h2>
-<div class="sectionbody">
-<div class="sect2">
-<h3 id="_create_app_directory"><a class="anchor" href="#_create_app_directory"></a>Create app directory</h3>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">mkdir -p $PROJECT_HOME/build/getstarted/nodejs
-cd $PROJECT_HOME/build/getstarted/nodejs</code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_create_package_json"><a class="anchor" href="#_create_package_json"></a>Create package.json</h3>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
-  "name": "helloworld-nodejs",
-  "version": "0.0.0",
-  "private": true,
-  "scripts": {
-    "start": "node app.js"
-  },
-  "dependencies": {
-    "ascii-art": "^1.4.4",
-    "express": "~4.16.0"
-  }
-}</code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_create_application"><a class="anchor" href="#_create_application"></a>Create Application</h3>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">var express = require('express');
-var asciiart = require('ascii-art');
-var app = express();
-
-var msg = "Node.js::"+ (process.env.MESSAGE || "Knative on OpenShift");
-
-app.get("/", function(req, res, next) {
-    asciiart
-       .font(msg,'Doom',(txt) =&gt;{
-        res
-        .status(200)
-        .type("html")
-        .send(`
-        &lt;html&gt;
-            &lt;head&gt;
-              &lt;title&gt;Knative Demo::Node.js&lt;/title&gt;
-            &lt;/head&gt;
-            &lt;style&gt;
-                pre {
-                   font-family: "Courier New", Courier, monospace;
-                }
-            &lt;/style&gt;
-          &lt;body&gt;
-             &lt;pre&gt;
-                ${txt}
-             &lt;/pre&gt;
-          &lt;/body&gt;
-        &lt;/html&gt;`);
-    });
-
-});
-
-
-app.listen(8080,function() {
-console.log("App started in port 8080");
-});</code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_create_a_dockerfile"><a class="anchor" href="#_create_a_dockerfile"></a>Create a Dockerfile</h3>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-dockerfile hljs" data-lang="dockerfile">FROM bucharestgold/centos7-s2i-nodejs:10.x
-WORKDIR /opt/app-root/src
-COPY package*.json ./
-RUN npm install
-COPY . .
-EXPOSE 8080 3000
-CMD ["npm", "start"]</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="build-nodejs-service"><a class="anchor" href="#build-nodejs-service"></a>Build Service</h2>
+<h2 id="rollout-changes"><a class="anchor" href="#rollout-changes"></a>Rolling out changes</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>From $PROJECT_HOME/build/getstarted/nodejs:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">docker build --rm -t dev.local/greeter-nodejs:1.0.0 .</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="deploy-nodejs-service"><a class="anchor" href="#deploy-nodejs-service"></a>Deploy Service</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>To deploy the Knative service we need to create file called <code>service.yaml</code> in <code>$PROJECT_HOME/build/getstarted/nodejs</code> with the following content:</p>
+<p>In the previous service deployments we did update the image from NodeJS to Java, now lets add a new environment variable(s) to the configuration and we will observe that it triggers new revision and deployment :</p>
 </div>
 <div class="sect2">
-<h3 id="_create_service_yaml"><a class="anchor" href="#_create_service_yaml"></a>Create service.yaml</h3>
+<h3 id="_adding_environment_variable"><a class="anchor" href="#_adding_environment_variable"></a>Adding Environment variable</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cd $PROJECT_HOME/build/getstarted/java</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Create a new <code>service-env.yaml</code> in <code>$PROJECT_HOME/build/getstarted/java</code> with the following content:</p>
+</div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: serving.knative.dev/v1alpha1
@@ -340,30 +261,140 @@ spec:
       revisionTemplate:
         spec:
           container:
-            image: dev.local/greeter:1.0.0 <i class="conum" data-value="1"></i><b>(1)</b></code></pre>
+            env:
+              - name: MESSAGE <i class="conum" data-value="1"></i><b>(1)</b>
+                value: Hello World
+            image: dev.local/greeter:2.0.0</code></pre>
 </div>
 </div>
 <div class="colist arabic">
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>It is very important that the image is a fully qualified name docker image name with tag.</td>
+<td>Updating the configuration with a environment variable called "MESSAGE"</td>
 </tr>
 </table>
+</div>
+<div class="paragraph">
+<p>The GreeterController.java is already setup to use the <code>MESSAGE</code> variable via <code>@Value</code> annotation:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">package com.example.demo;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+/**
+ * GreeterController
+ */
+@RestController
+public class GreeterController {
+
+    @Value("${MESSAGE:Knative on OpenShift}")
+    private String message;
+
+    @GetMapping("/")
+    public String greet() {
+        return"Java::"+message;
+    }
+}</code></pre>
+</div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_deploy_service"><a class="anchor" href="#_deploy_service"></a>Deploy Service</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">kubectl apply -f service.yaml</code></pre>
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">kubectl apply -f service-env.yaml</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The service deployment should now trigger a new revision something like <code>greeter-00003</code> and a new dpeloyment for the revision named <code>greeter-00003-deployment</code>.</p>
+</div>
+<div class="paragraph">
+<p><a href="#invoke-rev-service">Invoking Service</a> should return a response like <strong>Hello World</strong> instead of the earlier <strong>Java::Knative on OpenShift</strong></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="rollback-changes"><a class="anchor" href="#rollback-changes"></a>Rolling back changes</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To Rollback Changes we can could always delete the application and redeploy the previous version.  As Knative is backed by Istio we could still have the newer deployment in but without routing traffic to it.</p>
+</div>
+<div class="paragraph">
+<p>Knative allows us to do this using a strategy called "Pinned Revisions"</p>
+</div>
+<div class="sect2">
+<h3 id="_applying_pinned_revision"><a class="anchor" href="#_applying_pinned_revision"></a>Applying Pinned Revision</h3>
+<div class="paragraph">
+<p>Create a new <code>service-pinned.yaml</code> in <code>$PROJECT_HOME/build/java</code> with the following content:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: serving.knative.dev/v1alpha1
+kind: Service
+metadata:
+  name: greeter
+spec:
+  pinned:
+    revisionName: greeter-00001 <i class="conum" data-value="1"></i><b>(1)</b>
+    configuration:
+      revisionTemplate:
+        spec:
+          container:
+            env:
+              - name: MESSAGE
+                value: Hello World
+            image: dev.local/greeter:2.0.0</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>In this case we are setting it to existing revision called <code>greeter-0001</code></td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Though a new revision has been created with previous deployment, in the current service deployment we are keeping the configuration in tact as previous but updating the service route to a defined revision instead of latest.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>You can set <code>revisionName</code> to any available revision. You can find all the available revisions using the following command:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">kubectl get revisions.serving.knative.dev</code></pre>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_deploy_service_2"><a class="anchor" href="#_deploy_service_2"></a>Deploy Service</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">kubectl apply -f service-pinned.yaml</code></pre>
 </div>
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="invoke-nodejs-service"><a class="anchor" href="#invoke-nodejs-service"></a>Invoke Service</h2>
+<h2 id="invoke-rev-service"><a class="anchor" href="#invoke-rev-service"></a>Invoke Service</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>The applications can be invoked only using <code>knative-ingress-gateway</code> which was deployed with Knative serving deployment.</p>

@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Getting Started - Nodejs :: Knative Tutorial Docs</title>
-    <link rel="canonical" href="https://redhat-developer-demos.github.io/faas-tutorial/knative-tutorial/0.0.1/2.1get_started_nodejs.html">
+    <title>Getting Started - Java :: Knative Tutorial Docs</title>
+    <link rel="canonical" href="https://redhat-developer-demos.github.io/faas-tutorial/knative-tutorial/0.0.1/2.2get_started_java.html">
     <meta name="generator" content="Antora 1.1.1">
     <link rel="stylesheet" href="../../_/css/site.css">
 <link rel="icon" href="../../_/img/favicon.ico" type="image/x-icon">  </head>
@@ -99,48 +99,48 @@
     <button class="nav-toggle"></button>
     <a class="nav-link" href="2get_started.html#deploy-services">Build and Deploy Services</a>
 <ul class="nav-list">
-  <li class="nav-item is-current-page" data-depth="3">
+  <li class="nav-item" data-depth="3">
     <button class="nav-toggle"></button>
     <a class="nav-link" href="2.1get_started_nodejs.html">NodeJs</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="2.1get_started_nodejs.html#overview">Overview</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="2.1get_started_nodejs.html#create-nodejs-service">Create Service</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="2.1get_started_nodejs.html#build-nodejs-service">Build Service</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="2.1get_started_nodejs.html#deploy-nodejs-service">Deploy Service</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="2.1get_started_nodejs.html#invoke-nodejs-service">Invoke Service</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item is-current-page" data-depth="3">
+    <button class="nav-toggle"></button>
+    <a class="nav-link" href="2.2get_started_java.html">Java</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="4">
     <a class="nav-link" href="#overview">Overview</a>
   </li>
   <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="#create-nodejs-service">Create Service</a>
+    <a class="nav-link" href="#prerequisite">Prerequisites</a>
   </li>
   <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="#build-nodejs-service">Build Service</a>
+    <a class="nav-link" href="#create-java-service">Create Service</a>
   </li>
   <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="#deploy-nodejs-service">Deploy Service</a>
+    <a class="nav-link" href="#build-java-service">Build Service</a>
   </li>
   <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="#invoke-nodejs-service">Invoke Service</a>
-  </li>
-</ul>
-  </li>
-  <li class="nav-item" data-depth="3">
-    <button class="nav-toggle"></button>
-    <a class="nav-link" href="2.2get_started_java.html">Java</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="2.2get_started_java.html#overview">Overview</a>
+    <a class="nav-link" href="#deploy-java-service">Deploy Service</a>
   </li>
   <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="2.2get_started_java.html#prerequisite">Prerequisites</a>
-  </li>
-  <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="2.2get_started_java.html#create-java-service">Create Service</a>
-  </li>
-  <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="2.2get_started_java.html#build-java-service">Build Service</a>
-  </li>
-  <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="2.2get_started_java.html#deploy-java-service">Deploy Service</a>
-  </li>
-  <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="2.2get_started_java.html#invoke-java-service">Invoke Service</a>
+    <a class="nav-link" href="#invoke-java-service">Invoke Service</a>
   </li>
 </ul>
   </li>
@@ -202,92 +202,167 @@
     <li class="crumb"><a href="index.html">Knative Tutorial</a></li>
     <li class="crumb"><a href="2get_started.html">2. Get Started</a></li>
     <li class="crumb"><a href="2get_started.html#deploy-services">Build and Deploy Services</a></li>
-    <li class="crumb"><a href="2.1get_started_nodejs.html">NodeJs</a></li>
+    <li class="crumb"><a href="2.2get_started_java.html">Java</a></li>
   </ul>
 </nav>
-  <div class="edit-this-page"><a href="file:///Users/kameshs/git/kameshsampath/knative-tutorial/documentation/modules/ROOT/pages/2.1get_started_nodejs.adoc">Edit this Page</a></div>
+  <div class="edit-this-page"><a href="file:///Users/kameshs/git/kameshsampath/knative-tutorial/documentation/modules/ROOT/pages/2.2get_started_java.adoc">Edit this Page</a></div>
 </div>
 <article class="doc">
-<h1>Getting Started - Nodejs</h1>
+<h1>Getting Started - Java</h1>
 <div class="sect1">
 <h2 id="overview"><a class="anchor" href="#overview"></a>Overview</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This section shows how to build and deploy an simple greeter nodejs application as Knative service</p>
+<p>This section shows how to build and deploy an simple greeter Spring Boot Java application as Knative service</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="create-nodejs-service"><a class="anchor" href="#create-nodejs-service"></a>Create Service</h2>
+<h2 id="prerequisites"><a class="anchor" href="#prerequisites"></a>Prerequisites</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The Spring Boot application skeleton will be generated using spring-init cli, you can download and install it form <a href="https://docs.spring.io/spring-boot/docs/current/reference/html/getting-started-installing-spring-boot.html#getting-started-installing-the-cli">Spring CLI</a>.</p>
+</div>
+<div class="paragraph">
+<p>After installation ensure that the following command works correctly:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">spring --version</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="create-java-service"><a class="anchor" href="#create-java-service"></a>Create Service</h2>
 <div class="sectionbody">
 <div class="sect2">
 <h3 id="_create_app_directory"><a class="anchor" href="#_create_app_directory"></a>Create app directory</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">mkdir -p $PROJECT_HOME/build/getstarted/nodejs
-cd $PROJECT_HOME/build/getstarted/nodejs</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">mkdir -p $PROJECT_HOME/build/getstarted/java
+cd $PROJECT_HOME/build/getstarted/java</code></pre>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_create_package_json"><a class="anchor" href="#_create_package_json"></a>Create package.json</h3>
+<h3 id="_create_spring_boot_application"><a class="anchor" href="#_create_spring_boot_application"></a>Create Spring Boot application</h3>
+<div class="paragraph">
+<p>The following command creates an empty Spring Boot application in the directory $PROJECT_HOME/build/getstarted/java</p>
+</div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
-  "name": "helloworld-nodejs",
-  "version": "0.0.0",
-  "private": true,
-  "scripts": {
-    "start": "node app.js"
-  },
-  "dependencies": {
-    "ascii-art": "^1.4.4",
-    "express": "~4.16.0"
-  }
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">spring init ./</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_update_pom_xml"><a class="anchor" href="#_update_pom_xml"></a>Update pom.xml</h3>
+<div class="paragraph">
+<p>Update the pom.xml with the following content:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"&gt;
+	&lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+
+	&lt;groupId&gt;com.example&lt;/groupId&gt;
+	&lt;artifactId&gt;demo&lt;/artifactId&gt;
+	&lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;
+	&lt;packaging&gt;jar&lt;/packaging&gt;
+
+	&lt;name&gt;greeter&lt;/name&gt;
+	&lt;description&gt;Spring Boot Greeter&lt;/description&gt;
+
+    &lt;properties&gt;
+		&lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
+		&lt;project.reporting.outputEncoding&gt;UTF-8&lt;/project.reporting.outputEncoding&gt;
+        &lt;java.version&gt;1.8&lt;/java.version&gt;
+        &lt;spring-boot-version&gt;2.0.5.RELEASE&lt;/spring-boot-version&gt;
+    &lt;/properties&gt;
+
+  &lt;dependencyManagement&gt;
+    &lt;dependencies&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-dependencies&lt;/artifactId&gt;
+            &lt;version&gt;${spring-boot-version}&lt;/version&gt;
+            &lt;type&gt;pom&lt;/type&gt;
+            &lt;scope&gt;import&lt;/scope&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+  &lt;/dependencyManagement&gt;
+
+	&lt;dependencies&gt;
+		&lt;dependency&gt;
+			&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+			&lt;artifactId&gt;spring-boot-starter&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+
+        &lt;dependency&gt;
+			&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+			&lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
+		&lt;/dependency&gt;
+
+		&lt;dependency&gt;
+			&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+			&lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;
+			&lt;scope&gt;test&lt;/scope&gt;
+		&lt;/dependency&gt;
+	&lt;/dependencies&gt;
+
+    &lt;build&gt;
+        &lt;finalName&gt;${artifactId}&lt;/finalName&gt;
+		&lt;plugins&gt;
+			&lt;plugin&gt;
+				&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+                &lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt;
+                &lt;version&gt;${spring-boot-version}&lt;/version&gt;
+                &lt;executions&gt;
+					&lt;execution&gt;
+						&lt;goals&gt;
+							&lt;goal&gt;repackage&lt;/goal&gt;
+						&lt;/goals&gt;
+					&lt;/execution&gt;
+				&lt;/executions&gt;
+			&lt;/plugin&gt;
+		&lt;/plugins&gt;
+	&lt;/build&gt;
+
+
+&lt;/project&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_create_greeter_controller"><a class="anchor" href="#_create_greeter_controller"></a>Create Greeter Controller</h3>
+<div class="paragraph">
+<p>Create a new file called <code>GreeterController.java</code> in the folder <code>$PROJECT_HOME/build/getstarted/java/com/example/demo</code> with the following content:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">package com.example.demo;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+/**
+ * GreeterController
+ */
+@RestController
+public class GreeterController {
+
+    @Value("${MESSAGE:Knative on OpenShift}")
+    private String message;
+
+    @GetMapping("/")
+    public String greet() {
+        return"Java::"+message;
+    }
 }</code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_create_application"><a class="anchor" href="#_create_application"></a>Create Application</h3>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">var express = require('express');
-var asciiart = require('ascii-art');
-var app = express();
-
-var msg = "Node.js::"+ (process.env.MESSAGE || "Knative on OpenShift");
-
-app.get("/", function(req, res, next) {
-    asciiart
-       .font(msg,'Doom',(txt) =&gt;{
-        res
-        .status(200)
-        .type("html")
-        .send(`
-        &lt;html&gt;
-            &lt;head&gt;
-              &lt;title&gt;Knative Demo::Node.js&lt;/title&gt;
-            &lt;/head&gt;
-            &lt;style&gt;
-                pre {
-                   font-family: "Courier New", Courier, monospace;
-                }
-            &lt;/style&gt;
-          &lt;body&gt;
-             &lt;pre&gt;
-                ${txt}
-             &lt;/pre&gt;
-          &lt;/body&gt;
-        &lt;/html&gt;`);
-    });
-
-});
-
-
-app.listen(8080,function() {
-console.log("App started in port 8080");
-});</code></pre>
 </div>
 </div>
 </div>
@@ -295,36 +370,35 @@ console.log("App started in port 8080");
 <h3 id="_create_a_dockerfile"><a class="anchor" href="#_create_a_dockerfile"></a>Create a Dockerfile</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-dockerfile hljs" data-lang="dockerfile">FROM bucharestgold/centos7-s2i-nodejs:10.x
-WORKDIR /opt/app-root/src
-COPY package*.json ./
-RUN npm install
-COPY . .
-EXPOSE 8080 3000
-CMD ["npm", "start"]</code></pre>
+<pre class="highlightjs highlight"><code class="language-dockerfile hljs" data-lang="dockerfile">FROM fabric8/java-jboss-openjdk8-jdk:1.3.1
+ENV JAVA_APP_DIR=/deployments
+ENV AB_OFF=true
+EXPOSE 8080
+COPY target/greeter.jar /deployments/</code></pre>
 </div>
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="build-nodejs-service"><a class="anchor" href="#build-nodejs-service"></a>Build Service</h2>
+<h2 id="build-java-service"><a class="anchor" href="#build-java-service"></a>Build Service</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>From $PROJECT_HOME/build/getstarted/nodejs:</p>
+<p>From $PROJECT_HOME/build/getstarted/java:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">docker build --rm -t dev.local/greeter-nodejs:1.0.0 .</code></pre>
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">./mvnw -DskipTests clean package
+docker build --rm -t dev.local/greeter-java:1.0.0 .</code></pre>
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="deploy-nodejs-service"><a class="anchor" href="#deploy-nodejs-service"></a>Deploy Service</h2>
+<h2 id="deploy-java-service"><a class="anchor" href="#deploy-java-service"></a>Deploy Service</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>To deploy the Knative service we need to create file called <code>service.yaml</code> in <code>$PROJECT_HOME/build/getstarted/nodejs</code> with the following content:</p>
+<p>To deploy the Knative service we need to create file called <code>service.yaml</code> in <code>$PROJECT_HOME/build/getstarted/java</code> with the following content:</p>
 </div>
 <div class="sect2">
 <h3 id="_create_service_yaml"><a class="anchor" href="#_create_service_yaml"></a>Create service.yaml</h3>
@@ -340,7 +414,7 @@ spec:
       revisionTemplate:
         spec:
           container:
-            image: dev.local/greeter:1.0.0 <i class="conum" data-value="1"></i><b>(1)</b></code></pre>
+            image: dev.local/greeter:2.0.0 <i class="conum" data-value="1"></i><b>(1)</b></code></pre>
 </div>
 </div>
 <div class="colist arabic">
@@ -363,7 +437,7 @@ spec:
 </div>
 </div>
 <div class="sect1">
-<h2 id="invoke-nodejs-service"><a class="anchor" href="#invoke-nodejs-service"></a>Invoke Service</h2>
+<h2 id="invoke-java-service"><a class="anchor" href="#invoke-java-service"></a>Invoke Service</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>The applications can be invoked only using <code>knative-ingress-gateway</code> which was deployed with Knative serving deployment.</p>
@@ -383,7 +457,7 @@ curl -H "Host: ${HOST_URL}" ${IP_ADDRESS}:${SERVICE_NODEPORT}</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>The curl command above should return a response like <strong>NodeJs::Knative on OpenShift</strong></p>
+<p>The curl command above should return a response like <strong>Java::Knative on OpenShift</strong></p>
 </div>
 </div>
 </div>

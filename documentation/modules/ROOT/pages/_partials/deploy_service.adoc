@@ -1,0 +1,23 @@
+# tag::svcdefault[]
+=== Deploy Service 
+[source,yaml]
+----
+kubectl apply -f service.yaml
+----
+# end::svcdefault[]
+
+# tag::svcenv[]
+=== Deploy Service 
+[source,yaml]
+----
+kubectl apply -f service-env.yaml
+----
+# end::svcenv[]
+
+# tag::svcpinned[]
+=== Deploy Service 
+[source,yaml]
+----
+kubectl apply -f service-pinned.yaml
+----
+# end::svcpinned[]
