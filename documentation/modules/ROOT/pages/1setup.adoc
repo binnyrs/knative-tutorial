@@ -30,6 +30,7 @@ You will need in this tutorial:
 
 [#minishift]
 == Setup minishift
+
 [source,bash]
 -----
 #!/bin/bash
@@ -45,3 +46,140 @@ minishift start
 
 eval $(minishift docker-env) && eval $(minishift oc-env)
 -----
+
+[#admission-controller-webhook]
+Enable Admission Controller Webhook 
+[source,bash]
+----
+#!/bin/bash
+
+minishift openshift config set --target=kube --patch '{
+    "admissionConfig": {
+        "pluginConfig": {
+            "ValidatingAdmissionWebhook": {
+                "configuration": {
+                    "apiVersion": "v1",
+                    "kind": "DefaultAdmissionConfig",
+                    "disable": false
+                }
+            },
+            "MutatingAdmissionWebhook": {
+                "configuration": {
+                    "apiVersion": "v1",
+                    "kind": "DefaultAdmissionConfig",
+                    "disable": false
+                }
+            }
+        }
+    }
+}'
+----
+
+NOTE: Please allow few minutes for the OpenShift to be restarted with admission hooks enabled.
+
+[#configure-openshift-project]
+== Configuring OpenShift project
+
+[#login-as-admin]
+=== Login as admin user
+
+Since there was an `admin` addon added during minishift configuration, its now possible to login with the `admin` user. For example:
+
+[source,bash]
+----
+oc login -u admin -p admin
+----
+
+[#setup-knative-project]
+=== Setup project to be used for Knative applications
+
+[source,bash]
+----
+oc project myproject
+oc adm policy add-scc-to-user privileged -z myproject #<1>
+oc label namespace myproject istio-injection=enabled #<2>
+----
+<1> The `oc adm policy` adds the **privileged** https://docs.okd.io/3.10/admin_guide/manage_scc.html[Security Context Constraints(SCCs)]to the **default** Service Account. The SCCs are the precursor to the PSP (Pod Security Policy) mechanism in Kubernetes.
+<2> Ensures that the project **myproject** is labelled for Istio automatic sidecar injection.
+
+[IMPORTANT]
+====
+Avoid using `default` project in OpenShift for deploying Knative applications. As OpenShift deploys few of its mission critical applications in `default` project, its safe not to touch to avoid any crash to the OpenShift.
+====
+
+[#install-istio]
+== Install Istio
+
+[#istio-policies]
+=== Configure Istio Policies
+Knative depends on Istio, to deploy Istio you need to run the following commands to configure necessary https://istio.io/docs/setup/kubernetes/platform-setup/openshift/[privileges] to the service accounts used by Istio.
+
+[source,bash]
+----
+include::example$istio-policies.txt[]
+----
+
+[#deploy-istio]
+=== Deploy Istio Components
+
+[source,bash]
+----
+curl -L https://storage.googleapis.com/knative-releases/serving/latest/istio.yaml \
+    | sed 's/LoadBalancer/NodePort/' \
+    | kubectl apply -f -
+----
+
+You can moinitor the Istio components via the command:
+[source,bash]
+----
+kubectl get pods -n istio-system -w
+----
+
+NOTE: It will take a few minutes for all the Istio components to be up and running. Please wait for all the Istio pods to be running before deploying <<install-knative-serving,Knative Serving>>.  Use CTRL+C to exit watch mode. 
+
+[#update-istio-sidecar-injector-configmap]
+=== Update Istio sidecar injector ConfigMap
+
+The Istio v1.0.1 release automatic sidecar injection has removed `privileged:true` from init contianers,this will cause the Pods with istio proxies automatic inject to crash. Run the following command to update the **istio-sidecar-injector** ConfigMap.
+
+The following command ensures that the `privileged:true` is added to the **istio-sidecar-injector** ConfigMap:
+
+[source,bash]
+----
+kubectl get cm istio-sidecar-injector -n istio-system -oyaml  \
+| sed -e 's/securityContext:/securityContext:\\n      privileged: true/' \
+| kubectl replace -f -
+----
+
+IMPORTANT: Run the above command only once per minishift instance
+
+[#install-knative-serving]
+== Install Knative Serving
+
+[#knative-policies]
+=== Configure Istio Policies
+To deploy Knative you need to run the following commands to configure necessary https://istio.io/docs/setup/kubernetes/platform-setup/openshift/[privileges] to the service accounts used by Knative.
+
+[source,bash]
+----
+include::example$knative-policies.txt[]
+----
+
+[#deploy-knative-serving]
+=== Deploy Knative Serving Components
+
+[source,bash]
+----
+curl -L https://storage.googleapis.com/knative-releases/serving/latest/release-lite.yaml \
+    | sed 's/LoadBalancer/NodePort/' \
+    | kubectl apply -f -
+----
+
+You can moinitor the Istio components via the command:
+[source,bash]
+----
+oc get pods -n knative-serving -w
+oc get pods -n knative-build -w
+----
+
+NOTE: It will take a few minutes for all the Istio components to be up and running. Use CTRL+C to exit watch mode. 

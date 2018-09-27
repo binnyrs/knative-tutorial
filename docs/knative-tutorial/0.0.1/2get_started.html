@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Getting Started :: Knative Tutorial Docs</title>
+    <link rel="canonical" href="https://redhat-developer-demos.github.io/faas-tutorial/knative-tutorial/0.0.1/2get_started.html">
+    <meta name="generator" content="Antora 1.1.1">
+    <link rel="stylesheet" href="../../_/css/site.css">
+<link rel="icon" href="../../_/img/favicon.ico" type="image/x-icon">  </head>
+  <body class="article">
+<header class="header" role="banner">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <div class="navbar-item">
+        <a href="#">Knative Tutorial</a>
+        <span class="separator">//</span>
+        <a href="https://redhat-developer-demos.github.io/faas-tutorial">Docs</a>
+      </div>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <div class="navbar-item has-dropdown is-hoverable">
+          <div class="navbar-link">Project</div>
+          <div class="navbar-dropdown">
+            <div class="navbar-item"><strong>GitHub</strong></div>
+            <a class="navbar-item" href="https://github.com/redhat-developer-demos/knative-tutorial">Knative Tutorial
+              Repository</a>
+            <a class="navbar-item" href="https://github.com/redhat-developer-demos/knative-tutorial/issues">Knative
+              Tutorial Issue Tracker</a>
+          </div>
+        </div>
+        <a class="navbar-item" href="https://twitter.com/rhdevelopers">
+          <span class="icon">
+            <svg aria-hidden="true" data-icon="twitter" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+              <path fill="#57aaee" d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"></path>
+            </svg>
+          </span>
+        </a>
+      </div>
+    </div>
+  </nav>
+</header><div class="main-wrapper">
+<div class="navigation-container" data-component="knative-tutorial" data-version="0.0.1">
+  <aside class="navigation">
+    <div class="panels">
+<div class="navigation-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html">Knative Tutorial</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="index.html">Introduction to Knative Tutorial</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-toggle"></button>
+    <a class="nav-link" href="1setup.html">1. Setup</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="1setup.html#prerequisite">Prerequisites</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="1setup.html#minishift">Setup MiniShift</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="1setup.html#admission-controller-webhook">Enable Admission Controller Webhook</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="1setup.html#configure-openshift-project">Configuring OpenShift project</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="1setup.html#install-istio">Install Istio</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="1setup.html#install-knative-serving">Install Knative Serving</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <button class="nav-toggle"></button>
+    <a class="nav-link" href="2get_started.html">2. Get Started</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#overview">Overview</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#environment">Environment</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#environment">Sources</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-toggle"></button>
+    <a class="nav-link" href="#deploy-services">Build and Deploy Services</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <button class="nav-toggle"></button>
+    <a class="nav-link" href="2.1get_started_nodejs.html">NodeJs</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="2.1get_started_nodejs.html#overview">Overview</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="2.1get_started_nodejs.html#create-nodejs-service">Create Service</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="2.1get_started_nodejs.html#build-nodejs-service">Build Service</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="2.1get_started_nodejs.html#deploy-nodejs-service">Deploy Service</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="2.1get_started_nodejs.html#invoke-nodejs-service">Invoke Service</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="navigation-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Knative Tutorial</span>
+    <span class="version">0.0.1</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <span class="title">Knative Tutorial</span>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="index.html">0.0.1</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+  <main class="main">
+<div class="toolbar" role="navigation">
+  <button class="navigation-toggle"></button>
+  <a href="index.html" class="home-link"></a>
+<nav class="crumbs" aria-label="breadcrumbs">
+  <ul>
+    <li class="crumb"><a href="index.html">Knative Tutorial</a></li>
+    <li class="crumb"><a href="2get_started.html">2. Get Started</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="file:///Users/kameshs/git/kameshsampath/knative-tutorial/documentation/modules/ROOT/pages/2get_started.adoc">Edit this Page</a></div>
+</div>
+<article class="doc">
+<h1>Getting Started</h1>
+<div class="sect1">
+<h2 id="overview"><a class="anchor" href="#overview"></a>Overview</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The getting started allows you to deploy Knative services using <a href="https://github.com/knative/serving">Knative Serving</a>.  This tutorial shows example of deploying a simple Greeter service in following languages,</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Nodejs</p>
+</li>
+<li>
+<p>Java</p>
+</li>
+<li>
+<p>Golang</p>
+</li>
+<li>
+<p>Python</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>While deploying application in different languages demonstrates the polyglot capabilities as well as some key Knative concepts.</p>
+</div>
+<div class="paragraph">
+<p>The completed solutions is available in the <a href="../../../../solutions/getstarted">Solutions</a> folder.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="environment"><a class="anchor" href="#environment"></a>Environment</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Its assumed that you have setup the minishift and deployed Knative serving.  If not please vist <a href="1setup.html" class="page">setup</a> section to do the same before proceeding further.</p>
+</div>
+<div class="sect2">
+<h3 id="configure-cli"><a class="anchor" href="#configure-cli"></a>Configure the CLI</h3>
+<div class="paragraph">
+<p>Before we go further with the build its necessary that we configure the command line to interact with Docker Daemon of the minishift and we use the right compatible version of the OpenShift CLI.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">eval $(minishift docker-env) &amp;&amp; eval $(minishift oc-env)</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="sources"><a class="anchor" href="#sources"></a>Sources</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Clone the sources from <a href="https://github.com/kameshsampath/knative-tutorial" class="bare">https://github.com/kameshsampath/knative-tutorial</a></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">git clone {repo-url}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For the rest of the document we call the cloned folder as <code>$PROJECT_HOME</code>.</p>
+</div>
+<div class="paragraph">
+<p>Create a directory under $PROJECT_HOME called <strong>build</strong>, you will be using this directory as your working directory.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">mkdir -p $PROJECT_HOME/build</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can always refer to the <a href="../../../../solutions/getstarted">Solutions</a> if you need help.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="deploy-services"><a class="anchor" href="#deploy-services"></a>Deploy Services</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="2.1get_started_nodejs.html" class="page">Nodejs Service</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</article>
+  </main>
+</div>
+<footer class="footer">
+  <p>This content is brought to you by <a href="http://developers.redhat.com">Red Hat Developer</a> - Register today!.</p>
+</footer>
+<script src="../../_/js/site.js"></script>
+<script src="../../_/js/vendor/highlight.js"></script>
+<script>hljs.initHighlighting()</script>
+  </body>
+</html>

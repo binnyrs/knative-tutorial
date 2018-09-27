@@ -1,0 +1,12 @@
+apiVersion: serving.knative.dev/v1alpha1
+kind: Service
+metadata:
+  name: greeter
+spec:
+  pinned:
+    revisionName: greeter-00002
+  configuration:
+    revisionTemplate:
+      spec:
+        container:
+          image: dev.local/greeter

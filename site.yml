@@ -1,9 +1,9 @@
 runtime:
   cache_dir: ./.cache/antora
 site:
-  title: FaaS Tutorial Docs
+  title: Knative Tutorial Docs
   url: https://redhat-developer-demos.github.io/faas-tutorial/
-  start_page: faas-tutorial::index.adoc
+  start_page: knative-tutorial::index.adoc
 
 content:
   sources:

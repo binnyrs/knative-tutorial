@@ -1,0 +1,53 @@
+= Getting Started
+include::_attributes.adoc[]
+
+[#overview]
+== Overview
+The getting started allows you to deploy Knative services using https://github.com/knative/serving[Knative Serving].  This tutorial shows example of deploying a simple Greeter service in following languages,
+
+- Nodejs
+- Java
+
+While deploying application in different languages demonstrates the polyglot capabilities as well as some key Knative concepts.
+
+The completed solutions is available in the link:../../../../solutions/getstarted[Solutions] folder.
+
+[#environment]
+== Environment
+
+Its assumed that you have setup the minishift and deployed Knative serving.  If not please vist xref:1setup.adoc[setup] section to do the same before proceeding further.
+
+[#configure-cli]
+=== Configure the CLI
+
+Before we go further with the build its necessary that we configure the command line to interact with Docker Daemon of the minishift and we use the right compatible version of the OpenShift CLI.
+
+[source,bash]
+----
+eval $(minishift docker-env) && eval $(minishift oc-env)
+----
+
+[#sources]
+== Sources
+
+Clone the sources from {repo-url}
+
+[source,bash]
+----
+git clone {repo-url}
+----
+
+For the rest of the document we call the cloned folder as `$PROJECT_HOME`.
+
+Create a directory under $PROJECT_HOME called **build**, you will be using this directory as your working directory. 
+
+[source,bash]
+----
+mkdir -p $PROJECT_HOME/build
+----
+
+You can always refer to the link:../../../../solutions/getstarted[Solutions] if you need help.
+
+[#deploy-services]
+== Deploy Services
+** xref:2.1get_started_nodejs.adoc[Nodejs Service]

@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Getting Started - Nodejs :: Knative Tutorial Docs</title>
+    <link rel="canonical" href="https://redhat-developer-demos.github.io/faas-tutorial/knative-tutorial/0.0.1/2.1get_started_nodejs.html">
+    <meta name="generator" content="Antora 1.1.1">
+    <link rel="stylesheet" href="../../_/css/site.css">
+<link rel="icon" href="../../_/img/favicon.ico" type="image/x-icon">  </head>
+  <body class="article">
+<header class="header" role="banner">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <div class="navbar-item">
+        <a href="#">Knative Tutorial</a>
+        <span class="separator">//</span>
+        <a href="https://redhat-developer-demos.github.io/faas-tutorial">Docs</a>
+      </div>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <div class="navbar-item has-dropdown is-hoverable">
+          <div class="navbar-link">Project</div>
+          <div class="navbar-dropdown">
+            <div class="navbar-item"><strong>GitHub</strong></div>
+            <a class="navbar-item" href="https://github.com/redhat-developer-demos/knative-tutorial">Knative Tutorial
+              Repository</a>
+            <a class="navbar-item" href="https://github.com/redhat-developer-demos/knative-tutorial/issues">Knative
+              Tutorial Issue Tracker</a>
+          </div>
+        </div>
+        <a class="navbar-item" href="https://twitter.com/rhdevelopers">
+          <span class="icon">
+            <svg aria-hidden="true" data-icon="twitter" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+              <path fill="#57aaee" d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"></path>
+            </svg>
+          </span>
+        </a>
+      </div>
+    </div>
+  </nav>
+</header><div class="main-wrapper">
+<div class="navigation-container" data-component="knative-tutorial" data-version="0.0.1">
+  <aside class="navigation">
+    <div class="panels">
+<div class="navigation-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html">Knative Tutorial</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="index.html">Introduction to Knative Tutorial</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-toggle"></button>
+    <a class="nav-link" href="1setup.html">1. Setup</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="1setup.html#prerequisite">Prerequisites</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="1setup.html#minishift">Setup MiniShift</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="1setup.html#admission-controller-webhook">Enable Admission Controller Webhook</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="1setup.html#configure-openshift-project">Configuring OpenShift project</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="1setup.html#install-istio">Install Istio</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="1setup.html#install-knative-serving">Install Knative Serving</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-toggle"></button>
+    <a class="nav-link" href="2get_started.html">2. Get Started</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="2get_started.html#overview">Overview</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="2get_started.html#environment">Environment</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="2get_started.html#environment">Sources</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-toggle"></button>
+    <a class="nav-link" href="2get_started.html#deploy-services">Build and Deploy Services</a>
+<ul class="nav-list">
+  <li class="nav-item is-current-page" data-depth="3">
+    <button class="nav-toggle"></button>
+    <a class="nav-link" href="2.1get_started_nodejs.html">NodeJs</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="#overview">Overview</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="#create-nodejs-service">Create Service</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="#build-nodejs-service">Build Service</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="#deploy-nodejs-service">Deploy Service</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="#invoke-nodejs-service">Invoke Service</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="navigation-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Knative Tutorial</span>
+    <span class="version">0.0.1</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <span class="title">Knative Tutorial</span>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="index.html">0.0.1</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+  <main class="main">
+<div class="toolbar" role="navigation">
+  <button class="navigation-toggle"></button>
+  <a href="index.html" class="home-link"></a>
+<nav class="crumbs" aria-label="breadcrumbs">
+  <ul>
+    <li class="crumb"><a href="index.html">Knative Tutorial</a></li>
+    <li class="crumb"><a href="2get_started.html">2. Get Started</a></li>
+    <li class="crumb"><a href="2get_started.html#deploy-services">Build and Deploy Services</a></li>
+    <li class="crumb"><a href="2.1get_started_nodejs.html">NodeJs</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="file:///Users/kameshs/git/kameshsampath/knative-tutorial/documentation/modules/ROOT/pages/2.1get_started_nodejs.adoc">Edit this Page</a></div>
+</div>
+<article class="doc">
+<h1>Getting Started - Nodejs</h1>
+<div class="sect1">
+<h2 id="overview"><a class="anchor" href="#overview"></a>Overview</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This section shows how to build and deploy an simple greeter nodejs application as Knative service</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="create-nodejs-service"><a class="anchor" href="#create-nodejs-service"></a>Create Service</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_create_app_directory"><a class="anchor" href="#_create_app_directory"></a>Create app directory</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">mkdir -p $PROJECT_HOME/build/getstarted/nodejs</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_create_package_json"><a class="anchor" href="#_create_package_json"></a>Create package.json</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
+  "name": "helloworld-nodejs",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "ascii-art": "^1.4.4",
+    "express": "~4.16.0"
+  }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_create_application"><a class="anchor" href="#_create_application"></a>Create Application</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">var express = require('express');
+var asciiart = require('ascii-art');
+var app = express();
+
+var msg = "Node.js::"+ (process.env.MESSAGE || "Knative on OpenShift");
+
+app.get("/", function(req, res, next) {
+    asciiart
+       .font(msg,'Doom',(txt) =&gt;{
+        res
+        .status(200)
+        .type("html")
+        .send(`
+        &lt;html&gt;
+            &lt;head&gt;
+              &lt;title&gt;Knative Demo::Node.js&lt;/title&gt;
+            &lt;/head&gt;
+            &lt;style&gt;
+                pre {
+                   font-family: "Courier New", Courier, monospace;
+                }
+            &lt;/style&gt;
+          &lt;body&gt;
+             &lt;pre&gt;
+                ${txt}
+             &lt;/pre&gt;
+          &lt;/body&gt;
+        &lt;/html&gt;`);
+    });
+
+});
+
+
+app.listen(8080,function() {
+console.log("App started in port 8080");
+});</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_create_a_dockerfile"><a class="anchor" href="#_create_a_dockerfile"></a>Create a Dockerfile</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-dockerfile hljs" data-lang="dockerfile">FROM bucharestgold/centos7-s2i-nodejs:10.x
+WORKDIR /opt/app-root/src
+COPY package*.json ./
+RUN npm install
+COPY . .
+EXPOSE 8080 3000
+CMD ["npm", "start"]</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="build-nodejs-service"><a class="anchor" href="#build-nodejs-service"></a>Build Service</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>From $PROJECT_HOME/build/getstarted/nodejs:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">docker build --rm -t dev.local/greeter-nodejs:1.0.0 .</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="deploy-nodejs-service"><a class="anchor" href="#deploy-nodejs-service"></a>Deploy Service</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To deploy the Knative service we need to create file called <code>service.yaml</code> in <code>$PROJECT_HOME/build/getstarted/nodejs</code> with the following content:</p>
+</div>
+<div class="sect2">
+<h3 id="_create_service_yaml"><a class="anchor" href="#_create_service_yaml"></a>Create service.yaml</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: serving.knative.dev/v1alpha1
+kind: Service
+metadata:
+  name: greeter
+spec:
+  runLatest:
+    configuration:
+      revisionTemplate:
+        spec:
+          container:
+            image: dev.local/greeter-nodejs:1.0.0 <i class="conum" data-value="1"></i><b>(1)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>It is very important that the image is a fully qualified name docker image name with tag.</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="invoke-nodejs-service"><a class="anchor" href="#invoke-nodejs-service"></a>Invoke Service</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The applications can be invoked only using <code>knative-ingress-gateway</code> which was deployed with Knative serving deployment.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>The following snippet shows how to invoke the greeter nodejs service that was deployed earlier:</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">export IP_ADDRESS=$(kubectl get node -o 'jsonpath={.items[0].status.addresses[0].address}')
+
+export SERVICE_NODEPORT=$(oc get svc knative-ingressgateway -n istio-system -o 'jsonpath={.spec.ports[?(@.port==80)].nodePort}')
+
+export HOST_URL=$(kubectl get routes.serving.knative.dev greeter  -o jsonpath='{.status.domain}')
+
+curl -H "Host: ${HOST_URL}" ${IP_ADDRESS}:${SERVICE_NODEPORT}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</article>
+  </main>
+</div>
+<footer class="footer">
+  <p>This content is brought to you by <a href="http://developers.redhat.com">Red Hat Developer</a> - Register today!.</p>
+</footer>
+<script src="../../_/js/site.js"></script>
+<script src="../../_/js/vendor/highlight.js"></script>
+<script>hljs.initHighlighting()</script>
+  </body>
+</html>

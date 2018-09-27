@@ -13,11 +13,11 @@ This content is brought to you by http://developers.redhat.com - Register today!
 
 toc::[]
 
-NOTE: Work in Progress
+include::documentation/modules/ROOT/pages/1setup.adoc[]
 
-== Advanced use cases
+include::documentation/modules/ROOT/pages/2get_started.adoc[]
 
-NOTE: Work in Progress
+include::documentation/modules/ROOT/pages/2.1get_started_nodejs.adoc[]
 
 == Tips &amp; Tricks
 

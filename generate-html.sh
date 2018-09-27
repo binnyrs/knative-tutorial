@@ -1,4 +1,4 @@
 #!/bin/bash
 
-antora --pull site.yml --stacktrace
-open docs/index.html
+antora --pull --clean site.yml --stacktrace
+# open docs/index.html
