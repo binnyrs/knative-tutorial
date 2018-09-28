@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Eventing :: Knative Tutorial Docs</title>
-    <link rel="canonical" href="https://redhat-developer-demos.github.io/faas-tutorial/knative-tutorial/0.0.1/4.eventing.html">
+    <link rel="canonical" href="https://redhat-developer-demos.github.io/knative-tutorial/knative-tutorial/0.0.1/4.eventing.html">
     <meta name="generator" content="Antora 1.1.1">
     <link rel="stylesheet" href="../../_/css/site.css">
 <link rel="icon" href="../../_/img/favicon.ico" type="image/x-icon">  </head>
@@ -15,7 +15,7 @@
       <div class="navbar-item">
         <a href="#">Knative Tutorial</a>
         <span class="separator">//</span>
-        <a href="https://redhat-developer-demos.github.io/faas-tutorial">Docs</a>
+        <a href="https://redhat-developer-demos.github.io/knative-tutorial">Docs</a>
       </div>
       <button class="navbar-burger" data-target="topbar-nav">
         <span></span>
@@ -170,7 +170,16 @@
 </ul>
   </li>
   <li class="nav-item is-current-page" data-depth="1">
+    <button class="nav-toggle"></button>
     <a class="nav-link" href="4.eventing.html">Eventing</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#overview">Overview</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#install-knative-eventing">Install Knative Eventing</a>
+  </li>
+</ul>
   </li>
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="5.traffic_splitting.html">Traffic Splitting</a>
@@ -213,7 +222,65 @@
 </div>
 <article class="doc">
 <h1>Eventing</h1>
-
+<div class="sect1">
+<h2 id="overview"><a class="anchor" href="#overview"></a>Overview</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Knative Eventing allows us to define and deploy Event Sources that can listen to external events, it can be imagined like a Producer-Consumer model. The services that are deployed via Knative Serving can then be able to consume the events or subset of events from the Producer via Feeds.  All the messages that are exchanged follows the <a href="https://github.com/cloudevents/spec/blob/master/spec.md">CloudEvents Specification</a>.</p>
+</div>
+<div class="paragraph">
+<p>The Eventing has three main building blocks:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/knative/docs/tree/master/eventing#buses">Buses</a></p>
+</li>
+<li>
+<p><a href="https://github.com/knative/docs/tree/master/eventing#sources">Sources</a></p>
+</li>
+<li>
+<p><a href="https://github.com/knative/docs/tree/master/eventing#flows">Flows</a></p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The Eventing specification is currently under extensive development so expect lot of changes</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="install-knative-eventing"><a class="anchor" href="#install-knative-eventing"></a>Install Knative Eventing</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Its assumed that you have already installed Knative Serving, if not please visit the section <a href="1setup.html#install-knative-serving" class="page">Install Knative Serving</a> to set up the same.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">kubectl apply --filename https://storage.googleapis.com/knative-releases/eventing/latest/release.yaml</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="demo-overview"><a class="anchor" href="#demo-overview"></a>Demo Application</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In this section we will build a sequence demo, a simple polyglot application built using nodeJS, Java and Golang.</p>
+</div>
+</div>
+</div>
 </article>
   </main>
 </div>
