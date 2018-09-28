@@ -1,0 +1,12 @@
+# tag::greeter-00001[]
+image::greeter-00001.png[Node JS Greeter Service]
+# end::greeter-00001[]
+
+# tag::greeter-00002[]
+image::greeter-00002.png[Java Greeter Service]
+# end::greeter-00002[]
+
+
+# tag::greeter-00003[]
+image::greeter-00003.png[Java Greeter Service with Environment Variable]
+# end::greeter-00003[]

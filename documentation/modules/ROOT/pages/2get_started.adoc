@@ -10,7 +10,7 @@ The getting started allows you to deploy Knative services using https://github.c
 
 While deploying application in different languages demonstrates the polyglot capabilities as well as some key Knative concepts.
 
-The completed solutions is available in the link:../../../../solutions/getstarted[Solutions] folder.
+The completed solutions is available in the {repo-url}/solutions/getstarted[Solutions] folder.
 
 [#environment]
 == Environment
@@ -46,7 +46,7 @@ Create a directory under $PROJECT_HOME called **build**, you will be using this 
 mkdir -p $PROJECT_HOME/build
 ----
 
-You can always refer to the link:../../../../solutions/getstarted[Solutions] if you need help.
+You can always refer to the {repo-url}/solutions/getstarted[Solutions] if you need help.
 
 [#deploy-services]
 == Deploy Services
@@ -56,7 +56,7 @@ You can always refer to the link:../../../../solutions/getstarted[Solutions] if 
 [#points-to-ponder]
 == Points to Ponder
 
-After you have deployed the Java service, you would have noticed that it has triggered a new Kubernetes deployment something like `greeter-deployment-00002`.  Wondering the reason for it, lets compare the two `service.yaml` that were deployed:
+After you have deployed the Java service, you would have noticed that it has triggered a new Kubernetes deployment something like `greeter-00002-deployment`.  Wondering the reason for it, lets compare the two `service.yaml` that were deployed:
 
 .Greeter Service
 |====
@@ -94,10 +94,11 @@ spec:
 |====
 
 If you observe the only diffrence between the two service deployments is the version of the Docker Image, which is a configuration change.  Knative follows https://12factor.net/[12-factor] application principles where in every configuration change leads to a new revision,
-[source,yaml]
+
+[source,bash]
 ----
-kubectl get configurations.knative.dev #<1>
-kubectl get revisions.knative.dev #<2>
+kubectl get configurations.serving.knative.dev #<1>
+kubectl get revisions.serving.knative.dev #<2>
 ----
 
 <1> Will return only one configuration called `greeter`
@@ -105,5 +106,5 @@ kubectl get revisions.knative.dev #<2>
 
 [NOTE]
 ====
-Each revision will trigger new deployments, and since the service is configured with **runLatest** it always serves the latest revision.  There is also another type of service deployed which can run with xref:3.revisions.adoc[Revisions].
+Each revision will trigger new deployments, and since the service is configured with **runLatest** it always serves the latest revision.  Check xref:3.revisions_configurations[Revisions and Configurations] for more details on revisions, configurations and other possible revision rollout strategy.
 ====

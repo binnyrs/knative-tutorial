@@ -39,9 +39,28 @@ include::{examplesdir}/getstarted/nodejs/Dockerfile.txt[]
 
 From $PROJECT_HOME/build/getstarted/nodejs:
 
-[source,json]
+=== Local 
+
+You can use node package managers like https://yarnpkg.com/en/[yarn] or https://www.npmjs.com/[npm].  
+
+The code below shows how to do it with `yarn`:
+
+[source,bash]
 ----
-docker build --rm -t dev.local/greeter-nodejs:1.0.0 .
+yarn install
+yarn start #<1>
+----
+
+<1> This will start the application locally  and accessible via http://localhost:8080/
+
+=== OpenShift
+
+==== Docker Image
+
+[source,bash]
+----
+docker build --rm -t dev.local/greeter:1.0.0 .
+docker images | grep dev.local
 ----
 
 [#deploy-nodejs-service]
@@ -68,6 +87,10 @@ spec:
 <1> It is very important that the image is a fully qualified name docker image name with tag.
 
 include::{partialsdir}/deploy_service.adoc[tag=svcdefault]
+
+After successful deployment of the service we should see a Kubernetes deployment called `greeter-00001-deployment` available in the OpenShift dashboard:
+
+include::{partialsdir}/deployments.adoc[tag=greeter-00001]
 
 [#invoke-nodejs-service]
 == Invoke Service

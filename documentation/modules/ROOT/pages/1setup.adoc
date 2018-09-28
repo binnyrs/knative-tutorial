@@ -135,7 +135,7 @@ You can moinitor the Istio components via the command:
 kubectl get pods -n istio-system -w
 ----
 
-NOTE: It will take a few minutes for all the Istio components to be up and running. Please wait for all the Istio pods to be running before deploying <<install-knative-serving,Knative Serving>>.  Use CTRL+C to exit watch mode. 
+NOTE: It will take a few minutes for all the Istio components to be up and running. Please wait for all the Istio pods to be running before deploying <<install-knative-serving,Knative Serving>>.  Use kbd:[CTRL+C] to exit watch mode. 
 
 [#update-istio-sidecar-injector-configmap]
 === Update Istio sidecar injector ConfigMap
@@ -182,4 +182,4 @@ oc get pods -n knative-serving -w
 oc get pods -n knative-build -w
 ----
 
-NOTE: It will take a few minutes for all the Istio components to be up and running. Use CTRL+C to exit watch mode. 
+NOTE: It will take a few minutes for all the Istio components to be up and running. Use kbd:[CTRL+C] to exit watch mode. 

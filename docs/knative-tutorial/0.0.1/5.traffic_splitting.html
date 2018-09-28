@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Knative Tutorial :: Knative Tutorial Docs</title>
-    <link rel="canonical" href="https://redhat-developer-demos.github.io/faas-tutorial/knative-tutorial/0.0.1/index.html">
+    <title>Traffic Splitting :: Knative Tutorial Docs</title>
+    <link rel="canonical" href="https://redhat-developer-demos.github.io/faas-tutorial/knative-tutorial/0.0.1/5.traffic_splitting.html">
     <meta name="generator" content="Antora 1.1.1">
     <link rel="stylesheet" href="../../_/css/site.css">
 <link rel="icon" href="../../_/img/favicon.ico" type="image/x-icon">  </head>
@@ -55,7 +55,7 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="0">
 <ul class="nav-list">
-  <li class="nav-item is-current-page" data-depth="1">
+  <li class="nav-item" data-depth="1">
     <a class="nav-link" href="index.html">Introduction to Knative Tutorial</a>
   </li>
   <li class="nav-item" data-depth="1">
@@ -172,7 +172,7 @@
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="4.eventing.html">Eventing</a>
   </li>
-  <li class="nav-item" data-depth="1">
+  <li class="nav-item is-current-page" data-depth="1">
     <a class="nav-link" href="5.traffic_splitting.html">Traffic Splitting</a>
   </li>
 </ul>
@@ -202,62 +202,18 @@
   <main class="main">
 <div class="toolbar" role="navigation">
   <button class="navigation-toggle"></button>
-  <a href="index.html" class="home-link is-current"></a>
+  <a href="index.html" class="home-link"></a>
 <nav class="crumbs" aria-label="breadcrumbs">
   <ul>
     <li class="crumb"><a href="index.html">Knative Tutorial</a></li>
-    <li class="crumb"><a href="index.html">Introduction to Knative Tutorial</a></li>
+    <li class="crumb"><a href="5.traffic_splitting.html">Traffic Splitting</a></li>
   </ul>
 </nav>
-  <div class="edit-this-page"><a href="file:///Users/kameshs/git/kameshsampath/knative-tutorial/documentation/modules/ROOT/pages/index.adoc">Edit this Page</a></div>
+  <div class="edit-this-page"><a href="file:///Users/kameshs/git/kameshsampath/knative-tutorial/documentation/modules/ROOT/pages/5.traffic_splitting.adoc">Edit this Page</a></div>
 </div>
 <article class="doc">
-<h1>Knative Tutorial</h1>
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
-</td>
-<td class="content">
-This tutorial is under development and some sections can undergo rapid changes.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>This tutorial allows you to get started with <a href="https://cloud.google.com/knative/">Knative</a>.  The tutorial is divided into the following sections:</p>
-</div>
-<div class="paragraph">
-<p><a href="1setup.html" class="page">Setup</a></p>
-</div>
-<div class="paragraph">
-<p>This section details on setting up Knative on <a href="https://docs.okd.io/latest/minishift/getting-started/installing.html">minishift</a> starting from minishift profile setup to deploying Knative components such as <a href="https://github.com/knative/docs/tree/master/serving">Serving</a>, <a href="https://github.com/knative/docs/tree/master/eventing">Eventing</a>.</p>
-</div>
-<div class="paragraph">
-<p><a href="2get_started.html" class="page">Get Started</a></p>
-</div>
-<div class="paragraph">
-<p>This section details how to deploy your services using <a href="https://github.com/knative/docs/tree/master/serving">Serving</a> along with explaining the workflow thats involved with each service deployment using the primary building block called <a href="https://github.com/knative/serving/blob/master/docs/spec/spec.md#service">Service</a></p>
-</div>
-<div class="paragraph">
-<p><a href="3.revisions_configurations.html" class="page">Revisions and Configurations</a></p>
-</div>
-<div class="paragraph">
-<p>This section extends the previous section in going a bit deeper into the other building blocks of  <a href="https://github.com/knative/docs/tree/master/serving">Serving</a> namely <a href="https://github.com/knative/serving/blob/master/docs/spec/spec.md#revision">Revisions</a> and <a href="https://github.com/knative/serving/blob/master/docs/spec/spec.md#configuration">Configurations</a>.</p>
-</div>
-<div class="paragraph">
-<p><a href="4.eventing.html" class="page">Eventing</a></p>
-</div>
-<div class="paragraph">
-<p>This section introduces you to another important component of Knative the <a href="https://github.com/knative/eventing">Eventing</a>.  Eventing allows us to build a network services using events, in which the service can listen to Events via Event Sources.  The section only covers the very basic of <a href="https://github.com/knative/eventing">Eventing</a>.</p>
-</div>
-<div class="paragraph">
-<p><a href="5.traffic_splitting.html" class="page">Traffic Splitting</a></p>
-</div>
-<div class="paragraph">
-<p>This last section goes deeper into another important building block of <a href="https://github.com/knative/docs/tree/master/serving">Serving</a> namely <a href="https://github.com/knative/serving/blob/master/docs/spec/spec.md#route">Route</a>.  In this section we will see how to do smart routing between various <a href="https://github.com/knative/serving/blob/master/docs/spec/spec.md#revision">Revisions</a> of the service.</p>
-</div>
+<h1>Traffic Splitting</h1>
+
 </article>
   </main>
 </div>

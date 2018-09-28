@@ -169,6 +169,12 @@
   </li>
 </ul>
   </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="4.eventing.html">Eventing</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="5.traffic_splitting.html">Traffic Splitting</a>
+  </li>
 </ul>
   </li>
 </ul>
@@ -215,8 +221,8 @@
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">kubectl get configurations.knative.dev <i class="conum" data-value="1"></i><b>(1)</b>
-kubectl get revisions.knative.dev <i class="conum" data-value="2"></i><b>(2)</b></code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">kubectl get configurations.serving.knative.dev <i class="conum" data-value="1"></i><b>(1)</b>
+kubectl get revisions.serving.knative.dev <i class="conum" data-value="2"></i><b>(2)</b></code></pre>
 </div>
 </div>
 <div class="colist arabic">
@@ -311,10 +317,15 @@ public class GreeterController {
 </div>
 </div>
 <div class="paragraph">
-<p>The service deployment should now trigger a new revision something like <code>greeter-00003</code> and a new dpeloyment for the revision named <code>greeter-00003-deployment</code>.</p>
+<p>The service deployment should now trigger a new revision something like <code>greeter-00003</code> and a new deployment for the revision named <code>greeter-00003-deployment</code> and it will available in the OpenShift dashboard:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/greeter-00003.png" alt="Java Greeter Service with Environment Variable">
+</div>
 </div>
 <div class="paragraph">
-<p><a href="#invoke-rev-service">Invoking Service</a> should return a response like <strong>Hello World</strong> instead of the earlier <strong>Java::Knative on OpenShift</strong></p>
+<p><a href="#invoke-rev-service">Invoking Service</a> should return a response like <strong>Java::Hello World</strong> instead of the earlier <strong>Java::Knative on OpenShift</strong></p>
 </div>
 </div>
 </div>
@@ -356,12 +367,9 @@ spec:
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>In this case we are setting it to existing revision called <code>greeter-0001</code></td>
+<td>In this case we are setting it to existing revision called <code>greeter-00001</code></td>
 </tr>
 </table>
-</div>
-<div class="paragraph">
-<p>Though a new revision has been created with previous deployment, in the current service deployment we are keeping the configuration in tact as previous but updating the service route to a defined revision instead of latest.</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -371,7 +379,7 @@ spec:
 </td>
 <td class="content">
 <div class="paragraph">
-<p>You can set <code>revisionName</code> to any available revision. You can find all the available revisions using the following command:</p>
+<p>You can set <code>revisionName</code> to any available revision. You can find all the available revisions using the command:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -389,6 +397,23 @@ spec:
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">kubectl apply -f service-pinned.yaml</code></pre>
 </div>
+</div>
+<div class="paragraph">
+<p>Though a new revision <code>greeting-00003</code> has been created with previous deployment, with this <strong>pinned</strong> revision rollout strategy we are pinning the service to use revision <code>greeting-00001</code>.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>For pinned revision service deployments the configuration section of the <code>service.yaml</code> is completely ignored. But since its a mandatory element of the service schema we leave it in tact with last revision to avoid creation of new revision with the pinned revision service deployment.</p>
+</div>
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
@@ -414,7 +439,7 @@ curl -H "Host: ${HOST_URL}" ${IP_ADDRESS}:${SERVICE_NODEPORT}</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>The curl command above should return a response like <strong>NodeJs::Knative on OpenShift</strong></p>
+<p>The curl command above should return a response like <strong>NodeJs::Knative on OpenShift</strong> instead of <strong>Java::Hello World</strong></p>
 </div>
 </div>
 </div>

@@ -33,3 +33,5 @@
 ** xref:3.revisions_configurations.adoc#rollback-changes[Rollback Configuration]
 ** xref:3.revisions_configurations.adoc#invoke-rev-service[Invoke Service]
 
+* xref:4.eventing.adoc[Eventing]
+* xref:5.traffic_splitting.adoc[Traffic Splitting]

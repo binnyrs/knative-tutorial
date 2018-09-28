@@ -169,6 +169,12 @@
   </li>
 </ul>
   </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="4.eventing.html">Eventing</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="5.traffic_splitting.html">Traffic Splitting</a>
+  </li>
 </ul>
   </li>
 </ul>
@@ -269,7 +275,7 @@ cd $PROJECT_HOME/build/getstarted/java</code></pre>
 	&lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
 
 	&lt;groupId&gt;com.example&lt;/groupId&gt;
-	&lt;artifactId&gt;demo&lt;/artifactId&gt;
+	&lt;artifactId&gt;greeter&lt;/artifactId&gt;
 	&lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;
 	&lt;packaging&gt;jar&lt;/packaging&gt;
 
@@ -386,10 +392,35 @@ COPY target/greeter.jar /deployments/</code></pre>
 <div class="paragraph">
 <p>From $PROJECT_HOME/build/getstarted/java:</p>
 </div>
+<div class="sect2">
+<h3 id="_local"><a class="anchor" href="#_local"></a>Local</h3>
+<div class="paragraph">
+<p>The application can be built using maven, run the following command to build and start the application locally,</p>
+</div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">./mvnw -DskipTests clean package
-docker build --rm -t dev.local/greeter-java:1.0.0 .</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">./mvnw -DskipTests clean package
+./mvnw spring-boot:run <i class="conum" data-value="1"></i><b>(1)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>This will start the application locally  and accessible via <a href="http://localhost:8080/" class="bare">http://localhost:8080/</a>. Use <span class="keyseq"><kbd>Ctrl</kbd>+<kbd>C</kbd></span> to terminate the process.</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_openshift"><a class="anchor" href="#_openshift"></a>OpenShift</h3>
+<div class="sect3">
+<h4 id="_docker_image"><a class="anchor" href="#_docker_image"></a>Docker Image</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">docker build --rm -t dev.local/greeter:2.0.0 .</code></pre>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -431,6 +462,14 @@ spec:
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">kubectl apply -f service.yaml</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>After successful deployment of the service we should see a Kubernetes deployment called <code>greeter-00002-deployment</code> available in the OpenShift dashboard:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/greeter-00002.png" alt="Java Greeter Service">
 </div>
 </div>
 </div>

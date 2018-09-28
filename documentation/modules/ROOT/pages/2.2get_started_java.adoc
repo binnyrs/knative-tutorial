@@ -65,10 +65,25 @@ include::{examplesdir}/getstarted/java/Dockerfile.txt[]
 
 From $PROJECT_HOME/build/getstarted/java:
 
-[source,json]
+=== Local 
+
+The application can be built using maven, run the following command to build and start the application locally,
+
+[source,bash]
 ----
-./mvnw -DskipTests clean package
-docker build --rm -t dev.local/greeter-java:1.0.0 .
+./mvnw -DskipTests clean package 
+./mvnw spring-boot:run #<1>
+----
+
+<1> This will start the application locally  and accessible via http://localhost:8080/. Use kbd:[Ctrl+C] to terminate the process.
+
+=== OpenShift
+
+==== Docker Image
+
+[source,bash]
+----
+docker build --rm -t dev.local/greeter:2.0.0 .
 ----
 
 [#deploy-java-service]
@@ -95,6 +110,10 @@ spec:
 <1> It is very important that the image is a fully qualified name docker image name with tag.
 
 include::{partialsdir}/deploy_service.adoc[tag=svcdefault]
+
+After successful deployment of the service we should see a Kubernetes deployment called `greeter-00002-deployment` available in the OpenShift dashboard:
+
+include::{partialsdir}/deployments.adoc[tag=greeter-00002]
 
 [#invoke-java-service]
 == Invoke Service

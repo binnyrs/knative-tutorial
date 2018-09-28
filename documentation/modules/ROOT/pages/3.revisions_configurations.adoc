@@ -5,11 +5,10 @@ include::_attributes.adoc[]
 
 Knative follows https://12factor.net/[12-factor] application principles where in every configuration change leads to a new revision.  The configuration change could be image change, environment variables gets added or removed from the configuration.
 
-
-[source,yaml]
+[source,bash]
 ----
-kubectl get configurations.knative.dev #<1>
-kubectl get revisions.knative.dev #<2>
+kubectl get configurations.serving.knative.dev #<1>
+kubectl get revisions.serving.knative.dev #<2>
 ----
 
 <1> Will return only one configuration called `greeter`
@@ -58,9 +57,11 @@ include::{examplesdir}/getstarted/java/GreeterController.java.txt[]
 
 include::{partialsdir}/deploy_service.adoc[tag=svcenv]
 
-The service deployment should now trigger a new revision something like `greeter-00003` and a new dpeloyment for the revision named `greeter-00003-deployment`.
+The service deployment should now trigger a new revision something like `greeter-00003` and a new deployment for the revision named `greeter-00003-deployment` and it will available in the OpenShift dashboard:
 
-<<invoke-rev-service,Invoking Service>> should return a response like **Hello World** instead of the earlier **Java::Knative on OpenShift**
+include::{partialsdir}/deployments.adoc[tag=greeter-00003]
+
+<<invoke-rev-service,Invoking Service>> should return a response like **Java::Hello World** instead of the earlier **Java::Knative on OpenShift**
 
 
 [#rollback-changes]
@@ -93,13 +94,11 @@ spec:
 
 ----
 
-<1> In this case we are setting it to existing revision called `greeter-0001`
-
-Though a new revision has been created with previous deployment, in the current service deployment we are keeping the configuration in tact as previous but updating the service route to a defined revision instead of latest.
+<1> In this case we are setting it to existing revision called `greeter-00001`
 
 [TIP]
 ====
-You can set `revisionName` to any available revision. You can find all the available revisions using the following command:
+You can set `revisionName` to any available revision. You can find all the available revisions using the command:
 [source,bash]
 ----
 kubectl get revisions.serving.knative.dev 
@@ -108,9 +107,16 @@ kubectl get revisions.serving.knative.dev
 
 include::{partialsdir}/deploy_service.adoc[tag=svcpinned]
 
+Though a new revision `greeting-00003` has been created with previous deployment, with this **pinned** revision rollout strategy we are pinning the service to use revision `greeting-00001`.
+
+[IMPORTANT]
+====
+For pinned revision service deployments the configuration section of the `service.yaml` is completely ignored. But since its a mandatory element of the service schema we leave it in tact with last revision to avoid creation of new revision with the pinned revision service deployment.
+====
+
 [#invoke-rev-service]
 == Invoke Service
 
 include::{partialsdir}/invoke_service.adoc[]
 
-The curl command above should return a response like **NodeJs::Knative on OpenShift**
+The curl command above should return a response like **NodeJs::Knative on OpenShift** instead of **Java::Hello World**

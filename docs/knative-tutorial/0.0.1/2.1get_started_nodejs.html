@@ -169,6 +169,12 @@
   </li>
 </ul>
   </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="4.eventing.html">Eventing</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="5.traffic_splitting.html">Traffic Splitting</a>
+  </li>
 </ul>
   </li>
 </ul>
@@ -241,8 +247,8 @@ cd $PROJECT_HOME/build/getstarted/nodejs</code></pre>
     "start": "node app.js"
   },
   "dependencies": {
-    "ascii-art": "^1.4.4",
-    "express": "~4.16.0"
+    "express": "~4.16.0",
+    "gradient-string": "^1.2.0"
   }
 }</code></pre>
 </div>
@@ -252,41 +258,18 @@ cd $PROJECT_HOME/build/getstarted/nodejs</code></pre>
 <h3 id="_create_application"><a class="anchor" href="#_create_application"></a>Create Application</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">var express = require('express');
-var asciiart = require('ascii-art');
+<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">var express = require("express");
+const gradient = require("gradient-string");
 var app = express();
 
-var msg = "Node.js::"+ (process.env.MESSAGE || "Knative on OpenShift");
+var msg = process.env.MESSAGE || "Knative on OpenShift";
 
 app.get("/", function(req, res, next) {
-    asciiart
-       .font(msg,'Doom',(txt) =&gt;{
-        res
-        .status(200)
-        .type("html")
-        .send(`
-        &lt;html&gt;
-            &lt;head&gt;
-              &lt;title&gt;Knative Demo::Node.js&lt;/title&gt;
-            &lt;/head&gt;
-            &lt;style&gt;
-                pre {
-                   font-family: "Courier New", Courier, monospace;
-                }
-            &lt;/style&gt;
-          &lt;body&gt;
-             &lt;pre&gt;
-                ${txt}
-             &lt;/pre&gt;
-          &lt;/body&gt;
-        &lt;/html&gt;`);
-    });
-
+  res.send(gradient.pastel("NodeJS::" + msg));
 });
 
-
-app.listen(8080,function() {
-console.log("App started in port 8080");
+app.listen(8080, function() {
+  console.log("App started in port 8080");
 });</code></pre>
 </div>
 </div>
@@ -313,9 +296,39 @@ CMD ["npm", "start"]</code></pre>
 <div class="paragraph">
 <p>From $PROJECT_HOME/build/getstarted/nodejs:</p>
 </div>
+<div class="sect2">
+<h3 id="_local"><a class="anchor" href="#_local"></a>Local</h3>
+<div class="paragraph">
+<p>You can use node package managers like <a href="https://yarnpkg.com/en/">yarn</a> or <a href="https://www.npmjs.com/">npm</a>.</p>
+</div>
+<div class="paragraph">
+<p>The code below shows how to do it with <code>yarn</code>:</p>
+</div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">docker build --rm -t dev.local/greeter-nodejs:1.0.0 .</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">yarn install
+yarn start <i class="conum" data-value="1"></i><b>(1)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>This will start the application locally  and accessible via <a href="http://localhost:8080/" class="bare">http://localhost:8080/</a></td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_openshift"><a class="anchor" href="#_openshift"></a>OpenShift</h3>
+<div class="sect3">
+<h4 id="_docker_image"><a class="anchor" href="#_docker_image"></a>Docker Image</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">docker build --rm -t dev.local/greeter:1.0.0 .
+docker images | grep dev.local</code></pre>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -357,6 +370,14 @@ spec:
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">kubectl apply -f service.yaml</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>After successful deployment of the service we should see a Kubernetes deployment called <code>greeter-00001-deployment</code> available in the OpenShift dashboard:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/greeter-00001.png" alt="Node JS Greeter Service">
 </div>
 </div>
 </div>
