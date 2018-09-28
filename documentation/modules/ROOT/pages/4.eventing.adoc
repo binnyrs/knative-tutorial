@@ -1,2 +1,35 @@
 = Eventing
 include::_attributes.adoc[]
+
+[#overview]
+== Overview
+
+Knative Eventing allows us to define and deploy Event Sources that can listen to external events, it can be imagined like a Producer-Consumer model. The services that are deployed via Knative Serving can then be able to consume the events or subset of events from the Producer via Feeds.  All the messages that are exchanged follows the https://github.com/cloudevents/spec/blob/master/spec.md[CloudEvents Specification].
+
+The Eventing has three main building blocks:
+
+- https://github.com/knative/docs/tree/master/eventing#buses[Buses]
+
+- https://github.com/knative/docs/tree/master/eventing#sources[Sources]
+
+- https://github.com/knative/docs/tree/master/eventing#flows[Flows]
+
+[WARNING]
+====
+The Eventing specification is currently under extensive development so expect lot of changes
+====
+
+[#install-knative-eventing]
+== Install Knative Eventing
+
+Its assumed that you have already installed Knative Serving, if not please visit the section xref:1setup.adoc#install-knative-serving[Install Knative Serving] to set up the same.
+
+[source,bash]
+----
+kubectl apply --filename https://storage.googleapis.com/knative-releases/eventing/latest/release.yaml
+----
+
+[#demo-overview]
+== Demo Application
+
+In this section we will build a sequence demo, a simple polyglot application built using nodeJS, Java and Golang.
