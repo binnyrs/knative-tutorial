@@ -14,7 +14,7 @@ kubectl get revisions.serving.knative.dev #<2>
 <1> Will return only one configuration called `greeter`
 <2> Will return only one revision something like `greeter-00001`
 
-[#rollout-changes]
+[#roll-out-changes]
 == Rolling out new changes
 
 In the previous service deployments we did update the image from NodeJS to Java, now lets add a new environment variable(s) to the configuration and we will observe that it triggers new revision and deployment :
@@ -42,7 +42,7 @@ spec:
           container:
             image: dev.local/greeter:0.0.2
             env:
-             - name: MESSAGE_PREFIX # #<1>
+             - name: MESSAGE_PREFIX #<1>
                value: Hello
 ----
 
@@ -134,7 +134,7 @@ metadata:
   name: greeter
 spec:
   pinned:
-    revisionName: greeter-00001 # #<1>
+    revisionName: greeter-00001  #<1>
   configuration:
     revisionTemplate:
       spec:

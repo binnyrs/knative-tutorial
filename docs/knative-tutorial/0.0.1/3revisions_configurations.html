@@ -201,7 +201,7 @@ kubectl get revisions.serving.knative.dev <i class="conum" data-value="2"></i><b
 </div>
 </div>
 <div class="sect1">
-<h2 id="rollout-changes"><a class="anchor" href="#rollout-changes"></a>Rolling out new changes</h2>
+<h2 id="roll-out-changes"><a class="anchor" href="#roll-out-changes"></a>Rolling out new changes</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>In the previous service deployments we did update the image from NodeJS to Java, now lets add a new environment variable(s) to the configuration and we will observe that it triggers new revision and deployment :</p>
@@ -230,7 +230,7 @@ spec:
           container:
             image: dev.local/greeter:0.0.2
             env:
-             - name: MESSAGE_PREFIX # <i class="conum" data-value="1"></i><b>(1)</b>
+             - name: MESSAGE_PREFIX <i class="conum" data-value="1"></i><b>(1)</b>
                value: Hello</code></pre>
 </div>
 </div>
@@ -387,7 +387,7 @@ metadata:
   name: greeter
 spec:
   pinned:
-    revisionName: greeter-00001 # <i class="conum" data-value="1"></i><b>(1)</b>
+    revisionName: greeter-00001  <i class="conum" data-value="1"></i><b>(1)</b>
   configuration:
     revisionTemplate:
       spec:

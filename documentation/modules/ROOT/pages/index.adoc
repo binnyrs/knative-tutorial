@@ -7,7 +7,7 @@ This tutorial allows you to get started with https://cloud.google.com/knative/[K
 
 xref:1setup.adoc[Setup] 
 
-This section details on setting up Knative on https://docs.okd.io/latest/minishift/getting-started/installing.html[minishift] starting from minishift profile setup to deploying Knative components such as https://github.com/knative/docs/tree/master/serving[Serving], https://github.com/knative/docs/tree/master/eventing[Eventing].
+This section details on setting up Knative on https://docs.okd.io/latest/minishift/getting-started/installing.html[minishift] starting from minishift profile setup to deploying Knative components such as https://github.com/knative/docs/tree/master/serving[Serving],  https://github.com/knative/docs/tree/master/build[Build] and  https://github.com/knative/docs/tree/master/eventing[Eventing].
 
 xref:2get_started.adoc[Get Started]
 
