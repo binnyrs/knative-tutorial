@@ -7,8 +7,8 @@ site:
 
 content:
   sources:
-    - url: https://github.com/redhat-developer-demos/knative-tutorial
-      branches: master
+    - url: .
+      branches: HEAD
       start_path: documentation
 ui:
   bundle:

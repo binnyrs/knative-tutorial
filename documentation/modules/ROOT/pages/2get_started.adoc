@@ -5,12 +5,12 @@ include::_attributes.adoc[]
 == Overview
 The getting started allows you to deploy Knative services using https://github.com/knative/serving[Knative Serving].  This tutorial shows example of deploying a simple Greeter service in following languages,
 
-- Nodejs
 - Java
+- Nodejs
 
 While deploying application in different languages demonstrates the polyglot capabilities as well as some key Knative concepts.
 
-The completed solutions is available in the {repo-url}/solutions/getstarted[Solutions] folder.
+NOTE: All the code snippets shown in these sections are available in {repo-url}/solutions/getstarted[Solutions] folder.
 
 [#environment]
 == Environment
@@ -39,29 +39,22 @@ git clone {repo-url}
 
 For the rest of the document we call the cloned folder as `$PROJECT_HOME`.
 
-Create a directory under $PROJECT_HOME called **build**, you will be using this directory as your working directory. 
 
-[source,bash]
-----
-mkdir -p $PROJECT_HOME/build
-----
+[#build-services]
 
-You can always refer to the {repo-url}/solutions/getstarted[Solutions] if you need help.
+== Build Services
 
-[#deploy-services]
-== Deploy Services
-** xref:2.1get_started_nodejs.adoc[Nodejs Service]
+Build the greeter service in the language of your choice,
+
 ** xref:2.2get_started_java.adoc[Java Service]
+** xref:2.1get_started_nodejs.adoc[Nodejs Service]
 
-[#points-to-ponder]
-== Points to Ponder
+[#deploy-service]
+== Deploy Service
 
-After you have deployed the Java service, you would have noticed that it has triggered a new Kubernetes deployment something like `greeter-00002-deployment`.  Wondering the reason for it, lets compare the two `service.yaml` that were deployed:
+Navigate to solutions/getstarted folder of the `$PROJECT_HOME`. 
 
-.Greeter Service
-|====
-| **NodeJs** service | **Java** service 
-a|
+=== service.yaml
 [source,yaml]
 ----
 apiVersion: serving.knative.dev/v1alpha1
@@ -74,37 +67,19 @@ spec:
       revisionTemplate:
         spec:
           container:
-            image: dev.local/greeter:1.0.0
-----
-a|
-[source,yaml]
-----
-apiVersion: serving.knative.dev/v1alpha1
-kind: Service
-metadata:
-  name: greeter
-spec:
-  runLatest:
-    configuration:
-      revisionTemplate:
-        spec:
-          container:
-            image: dev.local/greeter:2.0.0 
-----
-|====
-
-If you observe the only diffrence between the two service deployments is the version of the Docker Image, which is a configuration change.  Knative follows https://12factor.net/[12-factor] application principles where in every configuration change leads to a new revision,
-
-[source,bash]
-----
-kubectl get configurations.serving.knative.dev #<1>
-kubectl get revisions.serving.knative.dev #<2>
+            image: dev.local/greeter:0.0.1 #<1>
 ----
 
-<1> Will return only one configuration called `greeter`
-<2> Will return two revisions something like `greeter-00001` and `greeter-00002`
+<1> It is very important that the image is a fully qualified name docker image name with tag.
 
-[NOTE]
-====
-Each revision will trigger new deployments, and since the service is configured with **runLatest** it always serves the latest revision.  Check xref:3.revisions_configurations[Revisions and Configurations] for more details on revisions, configurations and other possible revision rollout strategy.
-====
+include::{partialsdir}/deploy_service.adoc[tag=svcdefault]
+
+After successful deployment of the service we should see a Kubernetes deployment called `greeter-00001-deployment` available in the OpenShift dashboard:
+
+include::{partialsdir}/deployments.adoc[tag=greeter-00001]
+
+
+[#invoke-service]
+== Invoke Service
+
+include::{partialsdir}/invoke_service.adoc[tag=invokedefault]

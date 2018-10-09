@@ -1,6 +1,5 @@
 package com.example.demo;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -10,11 +9,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class GreeterController {
 
-    @Value("${MESSAGE:Knative on OpenShift}")
-    private String message;
+    // uncomment this line for new revison rollout change
+    // @Value("${MESSAGE_PREFIX}")
+    // private String prefix;
 
     @GetMapping("/")
     public String greet() {
-        return"Java::"+message;
+        // uncomment this line for new revison rollout change
+        //return prefix + "Java::Knative on OpenShift";
+        return "Java::Knative on OpenShift";
     }
 }

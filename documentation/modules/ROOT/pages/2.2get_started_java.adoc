@@ -9,56 +9,11 @@ This section shows how to build and deploy an simple greeter Spring Boot Java ap
 [#prerequisites]
 == Prerequisites 
 
-The Spring Boot application skeleton will be generated using spring-init cli, you can download and install it form https://docs.spring.io/spring-boot/docs/current/reference/html/getting-started-installing-spring-boot.html#getting-started-installing-the-cli[Spring CLI].
-
 After installation ensure that the following command works correctly:
 [source,bash]
 ----
 spring --version
 ----
-
-[#create-java-service]
-== Create Service
-
-=== Create app directory
-[source,bash]
-----
-mkdir -p $PROJECT_HOME/build/getstarted/java
-cd $PROJECT_HOME/build/getstarted/java
-----
-
-=== Create Spring Boot application
-
-The following command creates an empty Spring Boot application in the directory $PROJECT_HOME/build/getstarted/java
-
-[source,bash]
-----
-spring init ./
-----
-
-=== Update pom.xml
-
-Update the pom.xml with the following content:
-
-[source,xml]
-----
-include::{examplesdir}/getstarted/java/pom.xml.txt[]
-----
-
-=== Create Greeter Controller
-
-Create a new file called `GreeterController.java` in the folder `$PROJECT_HOME/build/getstarted/java/com/example/demo` with the following content:
-
-[source,java]
-----
-include::{examplesdir}/getstarted/java/GreeterController.java.txt[]
----- 
-
-=== Create a Dockerfile
-[source,dockerfile]
-----
-include::{examplesdir}/getstarted/java/Dockerfile.txt[]
----- 
 
 [#build-java-service]
 == Build Service
@@ -83,41 +38,14 @@ The application can be built using maven, run the following command to build and
 
 [source,bash]
 ----
-docker build --rm -t dev.local/greeter:2.0.0 .
+./mvnw -DskipTests clean package jib:dockerBuild #<1>
 ----
 
-[#deploy-java-service]
-== Deploy Service
-
-To deploy the Knative service we need to create file called `service.yaml` in `$PROJECT_HOME/build/getstarted/java` with the following content:
-
-=== Create service.yaml
-[source,yaml]
-----
-apiVersion: serving.knative.dev/v1alpha1
-kind: Service
-metadata:
-  name: greeter
-spec:
-  runLatest:
-    configuration:
-      revisionTemplate:
-        spec:
-          container:
-            image: dev.local/greeter:2.0.0 #<1>
-----
-
-<1> It is very important that the image is a fully qualified name docker image name with tag.
-
-include::{partialsdir}/deploy_service.adoc[tag=svcdefault]
-
-After successful deployment of the service we should see a Kubernetes deployment called `greeter-00002-deployment` available in the OpenShift dashboard:
-
-include::{partialsdir}/deployments.adoc[tag=greeter-00002]
+<1> This will build the docker image like `dev.local/greeter:0.0.1`
 
 [#invoke-java-service]
 == Invoke Service
 
-include::{partialsdir}/invoke_service.adoc[]
+include::{partialsdir}/invoke_service.adoc[tag=invokedefault]
 
 The curl command above should return a response like **Java::Knative on OpenShift**

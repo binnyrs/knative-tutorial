@@ -1,0 +1,169 @@
+= Revisions and Configurations
+include::_attributes.adoc[]
+
+== Overview 
+
+Knative follows https://12factor.net/[12-factor] application principles where in every configuration change leads to a new revision.  The configuration change could be image change, environment variables gets added or removed from the configuration.
+
+[source,bash]
+----
+kubectl get configurations.serving.knative.dev #<1>
+kubectl get revisions.serving.knative.dev #<2>
+----
+
+<1> Will return only one configuration called `greeter`
+<2> Will return only one revision something like `greeter-00001`
+
+[#rollout-changes]
+== Rolling out new changes
+
+In the previous service deployments we did update the image from NodeJS to Java, now lets add a new environment variable(s) to the configuration and we will observe that it triggers new revision and deployment :
+
+=== Adding Environment variable
+
+[source,bash]
+----
+cd $PROJECT_HOME/solutions/getstarted
+----
+
+Examine the `service-env.yaml` in the folder:
+
+[source,yaml]
+----
+apiVersion: serving.knative.dev/v1alpha1
+kind: Service
+metadata:
+  name: greeter
+spec:
+  runLatest:
+    configuration:
+      revisionTemplate:
+        spec:
+          container:
+            image: dev.local/greeter:0.0.2
+            env:
+             - name: MESSAGE_PREFIX # #<1>
+               value: Hello
+----
+
+<1> Updating the configuration with a environment variable called "MESSAGE_PREFIX"
+
+Make the greeter application to use the `MESSAGE_PREFIX`, in the solutions (java or node)  sources uncomment code that is marked as **new revison rollout change** and make sure to update the container image tag to `0.0.2` while rebuilding.  Refer to ** xref:2get_started.adoc#deploy-services[Build Services] for more details.
+
+TIP: For Java service update the `version` to `0.0.2` in **pom.xml**
+
+include::{partialsdir}/deploy_service.adoc[tag=svcenv]
+
+The service deployment should now trigger a new revision something like `greeter-00002` and a new deployment for the revision named `greeter-00002-deployment` and it will available in the OpenShift dashboard:
+
+include::{partialsdir}/deployments.adoc[tag=greeter-00002]
+
+[#points-to-ponder]
+== Points to Ponder
+
+After you have deployed the new revision of the service, you would have notice that it had triggered a new Kubernetes deployment something like `greeter-00002-deployment`.  Wondering the reason for it, lets compare the two `service.yaml` that were deployed:
+
+.Greeter Service
+|====
+a|
+[source,yaml]
+----
+apiVersion: serving.knative.dev/v1alpha1
+kind: Service
+metadata:
+  name: greeter
+spec:
+  runLatest:
+    configuration:
+      revisionTemplate:
+        spec:
+          container:
+            image: dev.local/greeter:0.0.1
+----
+a|
+[source,yaml]
+----
+apiVersion: serving.knative.dev/v1alpha1
+kind: Service
+metadata:
+  name: greeter
+spec:
+  runLatest:
+    configuration:
+      revisionTemplate:
+        spec:
+          container:
+            image: dev.local/greeter:0.0.1
+            env:
+              - name: MESSAGE_PREFIX
+                value: Hello 
+----
+|====
+
+If you observe the only difference between the two service deployments is the **env** variables, which is a configuration change that had caused new revision rollout.  
+
+NOTE: Knative follows https://12factor.net/[12-factor] application principles where in every configuration change leads to a new revision,
+
+[source,bash]
+----
+kubectl get configurations.serving.knative.dev #<1>
+kubectl get revisions.serving.knative.dev #<2>
+----
+
+<1> Will return only one configuration called `greeter`
+<2> Will return two revisions something like `greeter-00001` and `greeter-00002`
+
+You can <<invoke-service,Invoke the Service>> to see the changes from new revision
+
+[#rollback-changes]
+== Rolling back changes
+
+To Rollback Changes we can could always delete the application and redeploy the previous version.  As Knative is backed by Istio we could still have the newer deployment in but without routing traffic to it.
+
+Knative allows us to do this using a strategy called "Pinned Revisions" 
+
+=== Pinned Revision
+
+Use the `service-pinned.yaml` in `$PROJECT_HOME/solutions/getstarted`:
+
+[source,yaml]
+----
+apiVersion: serving.knative.dev/v1alpha1
+kind: Service
+metadata:
+  name: greeter
+spec:
+  pinned:
+    revisionName: greeter-00001 # #<1>
+  configuration:
+    revisionTemplate:
+      spec:
+        container:
+          image: dev.local/greeter:0.0.1
+----
+
+<1> In this case we are setting it to existing revision called `greeter-00001`
+
+[TIP]
+====
+You can set `revisionName` to any available revision. You can find all the available revisions using the command:
+[source,bash]
+----
+kubectl get revisions.serving.knative.dev 
+----
+====
+
+include::{partialsdir}/deploy_service.adoc[tag=svcpinned]
+
+Though a new revision `greeting-00003` has been created with previous deployment, with this **pinned** revision rollout strategy we are pinning the service to use revision `greeting-00001`.
+
+[IMPORTANT]
+====
+For pinned revision service deployments the configuration section of the `service.yaml` is completely ignored. But since its a mandatory element of the service schema we leave it in tact with last revision to avoid creation of new revision with the pinned revision service deployment.
+====
+
+[#invoke-service]
+== Invoke Service
+
+include::{partialsdir}/invoke_service.adoc[tag=invokedefault]
+

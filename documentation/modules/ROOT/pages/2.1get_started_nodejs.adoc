@@ -6,34 +6,6 @@ include::_attributes.adoc[]
 
 This section shows how to build and deploy an simple greeter nodejs application as Knative service 
 
-[#create-nodejs-service]
-== Create Service
-
-=== Create app directory
-[source,bash]
-----
-mkdir -p $PROJECT_HOME/build/getstarted/nodejs
-cd $PROJECT_HOME/build/getstarted/nodejs
-----
-
-=== Create package.json
-[source,json]
-----
-include::{examplesdir}/getstarted/nodejs/package.json.txt[]
-----
-
-=== Create Application
-[source,javascript]
-----
-include::{examplesdir}/getstarted/nodejs/app.js.txt[]
----- 
-
-=== Create a Dockerfile
-[source,dockerfile]
-----
-include::{examplesdir}/getstarted/nodejs/Dockerfile.txt[]
----- 
-
 [#build-nodejs-service]
 == Build Service
 
@@ -59,42 +31,13 @@ yarn start #<1>
 
 [source,bash]
 ----
-docker build --rm -t dev.local/greeter:1.0.0 .
+docker build --rm -t dev.local/greeter:0.0.1 .
 docker images | grep dev.local
 ----
-
-[#deploy-nodejs-service]
-== Deploy Service
-
-To deploy the Knative service we need to create file called `service.yaml` in `$PROJECT_HOME/build/getstarted/nodejs` with the following content:
-
-=== Create service.yaml
-[source,yaml]
-----
-apiVersion: serving.knative.dev/v1alpha1
-kind: Service
-metadata:
-  name: greeter
-spec:
-  runLatest:
-    configuration:
-      revisionTemplate:
-        spec:
-          container:
-            image: dev.local/greeter:1.0.0 #<1>
-----
-
-<1> It is very important that the image is a fully qualified name docker image name with tag.
-
-include::{partialsdir}/deploy_service.adoc[tag=svcdefault]
-
-After successful deployment of the service we should see a Kubernetes deployment called `greeter-00001-deployment` available in the OpenShift dashboard:
-
-include::{partialsdir}/deployments.adoc[tag=greeter-00001]
 
 [#invoke-nodejs-service]
 == Invoke Service
 
-include::{partialsdir}/invoke_service.adoc[]
+include::{partialsdir}/invoke_service.adoc[tag=invokedefault]
 
 The curl command above should return a response like **NodeJs::Knative on OpenShift**

@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Getting Started - Java :: Knative Tutorial Docs</title>
-    <link rel="canonical" href="https://redhat-developer-demos.github.io/knative-tutorial/knative-tutorial/0.0.1/2.2get_started_java.html">
+    <title>Build :: Knative Tutorial Docs</title>
+    <link rel="canonical" href="https://redhat-developer-demos.github.io/knative-tutorial/knative-tutorial/0.0.1/5build.html">
     <meta name="generator" content="Antora 1.1.1">
     <link rel="stylesheet" href="../../_/css/site.css">
 <link rel="icon" href="../../_/img/favicon.ico" type="image/x-icon">  </head>
@@ -130,7 +130,7 @@
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="4routing_traffic.html">Traffic Splitting</a>
   </li>
-  <li class="nav-item" data-depth="1">
+  <li class="nav-item is-current-page" data-depth="1">
     <a class="nav-link" href="5build.html">Build</a>
   </li>
   <li class="nav-item" data-depth="1">
@@ -167,105 +167,24 @@
 <nav class="crumbs" aria-label="breadcrumbs">
   <ul>
     <li class="crumb"><a href="index.html">Knative Tutorial</a></li>
-    <li class="crumb"><a href="2.2get_started_java.html">Getting Started - Java</a></li>
+    <li class="crumb"><a href="5build.html">Build</a></li>
   </ul>
 </nav>
-  <div class="edit-this-page"><a href="file:///Users/kameshs/git/kameshsampath/knative-tutorial/documentation/modules/ROOT/pages/2.2get_started_java.adoc">Edit this Page</a></div>
+  <div class="edit-this-page"><a href="file:///Users/kameshs/git/kameshsampath/knative-tutorial/documentation/modules/ROOT/pages/5build.adoc">Edit this Page</a></div>
 </div>
 <article class="doc">
-<h1>Getting Started - Java</h1>
-<div class="sect1">
-<h2 id="overview"><a class="anchor" href="#overview"></a>Overview</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>This section shows how to build and deploy an simple greeter Spring Boot Java application as Knative service</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="prerequisites"><a class="anchor" href="#prerequisites"></a>Prerequisites</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>After installation ensure that the following command works correctly:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">spring --version</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="build-java-service"><a class="anchor" href="#build-java-service"></a>Build Service</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>From $PROJECT_HOME/build/getstarted/java:</p>
-</div>
-<div class="sect2">
-<h3 id="_local"><a class="anchor" href="#_local"></a>Local</h3>
-<div class="paragraph">
-<p>The application can be built using maven, run the following command to build and start the application locally,</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">./mvnw -DskipTests clean package
-./mvnw spring-boot:run <i class="conum" data-value="1"></i><b>(1)</b></code></pre>
-</div>
-</div>
-<div class="colist arabic">
+<h1>Build</h1>
+<div class="admonitionblock note">
 <table>
 <tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>This will start the application locally  and accessible via <a href="http://localhost:8080/" class="bare">http://localhost:8080/</a>. Use <span class="keyseq"><kbd>Ctrl</kbd>+<kbd>C</kbd></span> to terminate the process.</td>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Work In Progress
+</td>
 </tr>
 </table>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_openshift"><a class="anchor" href="#_openshift"></a>OpenShift</h3>
-<div class="sect3">
-<h4 id="_docker_image"><a class="anchor" href="#_docker_image"></a>Docker Image</h4>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">./mvnw -DskipTests clean package jib:dockerBuild <i class="conum" data-value="1"></i><b>(1)</b></code></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>This will build the docker image like <code>dev.local/greeter:0.0.1</code></td>
-</tr>
-</table>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="invoke-java-service"><a class="anchor" href="#invoke-java-service"></a>Invoke Service</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>The applications can be invoked only using <code>knative-ingress-gateway</code> which was deployed with Knative serving deployment.</p>
-</div>
-<div class="paragraph">
-<p>The following snippet shows how to invoke the greeter nodejs service that was deployed earlier:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">export IP_ADDRESS=$(minishift ip)
-
-export SERVICE_NODEPORT=$(oc get svc knative-ingressgateway -n istio-system -o 'jsonpath={.spec.ports[?(@.port==80)].nodePort}')
-
-export HOST_URL=$(kubectl get routes.serving.knative.dev greeter  -o jsonpath='{.status.domain}')
-
-curl -H "Host: ${HOST_URL}" ${IP_ADDRESS}:${SERVICE_NODEPORT}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>The curl command above should return a response like <strong>Java::Knative on OpenShift</strong></p>
-</div>
-</div>
 </div>
 </article>
   </main>

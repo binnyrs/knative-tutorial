@@ -1,36 +1,15 @@
-var express = require('express');
-var asciiart = require('ascii-art');
+var express = require("express");
 var app = express();
 
-var msg = "Node.js::"+ (process.env.MESSAGE || "Knative on OpenShift");
+// uncomment this line for new revision rollout change
+//var msg = (process.env.MESSAGE_PREFIX || "") + "NodeJs::Knative on OpenShift";
+
+var msg = (process.env.MESSAGE_PREFIX || "") + "NodeJs::Knative on OpenShift";
 
 app.get("/", function(req, res, next) {
-    asciiart
-       .font(msg,'Doom',(txt) =>{
-        res
-        .status(200)
-        .type("html")
-        .send(`
-        <html>
-            <head>
-              <title>Knative Demo::Node.js</title>
-            </head>
-            <style>
-                pre {
-                   font-family: "Courier New", Courier, monospace;
-                }
-            </style>
-          <body>
-             <pre>
-                ${txt}
-             </pre>
-          </body>        
-        </html>`);
-    });
-   
+  res.status(200).send(msg);
 });
 
-
-app.listen(8080,function() {
-console.log("App started in port 8080");
+app.listen(8080, function() {
+  console.log("App started in port 8080");
 });

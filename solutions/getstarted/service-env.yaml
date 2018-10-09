@@ -8,7 +8,7 @@ spec:
       revisionTemplate:
         spec:
           container:
+            image: dev.local/greeter:0.0.1
             env:
-              - name: MESSAGE
-                value: Hello World
-            image: dev.local/greeter
+             - name: MESSAGE_PREFIX
+               value: Hello

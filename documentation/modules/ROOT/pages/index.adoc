@@ -13,14 +13,20 @@ xref:2get_started.adoc[Get Started]
 
 This section details how to deploy your services using https://github.com/knative/docs/tree/master/serving[Serving] along with explaining the workflow thats involved with each service deployment using the primary building block called https://github.com/knative/serving/blob/master/docs/spec/spec.md#service[Service]
 
-xref:3.revisions_configurations.adoc[Revisions and Configurations]
+xref:3revisions_configurations.adoc[Revisions and Configurations]
 
 This section extends the previous section in going a bit deeper into the other building blocks of  https://github.com/knative/docs/tree/master/serving[Serving] namely https://github.com/knative/serving/blob/master/docs/spec/spec.md#revision[Revisions] and https://github.com/knative/serving/blob/master/docs/spec/spec.md#configuration[Configurations].
 
-xref:4.eventing.adoc[Eventing]
+xref:4routing_traffic.adoc[Routing Traffic]
+
+This last section goes deeper into another important building block of https://github.com/knative/docs/tree/master/serving[Serving] namely https://github.com/knative/serving/blob/master/docs/spec/spec.md#route[Route].  In this section we will see how to do smart routing between various https://github.com/knative/serving/blob/master/docs/spec/spec.md#revision[Revisions] of the service.
+
+xref:5build.adoc[Build]
+
+This last section goes deeper into another important building block of https://github.com/knative/docs/tree/master/build[Build] 
+
+
+xref:6eventing.adoc[Eventing]
 
 This section introduces you to another important component of Knative the https://github.com/knative/eventing[Eventing].  Eventing allows us to build a network services using events, in which the service can listen to Events via Event Sources.  The section only covers the very basic of https://github.com/knative/eventing[Eventing].
 
-xref:5.traffic_splitting.adoc[Traffic Splitting]
-
-This last section goes deeper into another important building block of https://github.com/knative/docs/tree/master/serving[Serving] namely https://github.com/knative/serving/blob/master/docs/spec/spec.md#route[Route].  In this section we will see how to do smart routing between various https://github.com/knative/serving/blob/master/docs/spec/spec.md#revision[Revisions] of the service.

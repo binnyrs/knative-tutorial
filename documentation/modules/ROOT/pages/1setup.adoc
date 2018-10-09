@@ -38,6 +38,7 @@ You will need in this tutorial:
 minishift profile set serverless
 minishift config set memory 8GB
 minishift config set cpus 4
+minishift config set openshift-version v3.10.0
 minishift config set image-caching true
 minishift addon enable admin-user
 minishift addon enable anyuid
@@ -125,7 +126,6 @@ include::example$istio-policies.txt[]
 [source,bash]
 ----
 curl -L https://storage.googleapis.com/knative-releases/serving/latest/istio.yaml \
-    | sed 's/LoadBalancer/NodePort/' \
     | kubectl apply -f -
 ----
 
@@ -171,7 +171,6 @@ include::example$knative-policies.txt[]
 [source,bash]
 ----
 curl -L https://storage.googleapis.com/knative-releases/serving/latest/release-lite.yaml \
-    | sed 's/LoadBalancer/NodePort/' \
     | kubectl apply -f -
 ----
 

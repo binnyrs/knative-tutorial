@@ -8,4 +8,4 @@ spec:
       revisionTemplate:
         spec:
           container:
-            image: dev.local/greeter
+            image: dev.local/greeter:0.0.1
